@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.mingduo.security</groupId>
+    <artifactId>mingduo-security</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <description>seucurity demo</description>
+    <packaging>pom</packaging>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <spring-cloud.version>Finchley.SR2</spring-cloud.version>
+        <spring.io.version>Cairo-SR7</spring.io.version>
+        <mingduo.security.version>0.0.1-SNAPSHOT</mingduo.security.version>
+
+    </properties>
+
+
+
+    <modules>
+        <module>mingduo-security-core</module>
+        <module>mingduo-security-authorize</module>
+        <module>mingduo-security-demo</module>
+        <module>mingduo-security-browser</module>
+
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.spring.platform</groupId>
+                <artifactId>platform-bom</artifactId>
+                <version>Cairo-SR7</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Greenwich.SR3</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
+</project>
