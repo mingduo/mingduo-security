@@ -2,6 +2,7 @@ package com.mingduo.security.demo.dto;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.mingduo.security.demo.validator.MyContraint;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
@@ -26,6 +27,7 @@ public class User {
     @JsonView(User.UserSimpleView.class)
     private String id;
 
+    @ApiModelProperty("用户名")
     @MyContraint(message = "这是一个测试")
     @JsonView(UserSimpleView.class)
     private String username;

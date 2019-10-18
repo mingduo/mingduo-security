@@ -11,7 +11,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  */
 @EnableSwagger2
 @RestController
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "com.mingduo.security")
 public class SecurityDemoApplication {
 
     public static void main(String[] args) {

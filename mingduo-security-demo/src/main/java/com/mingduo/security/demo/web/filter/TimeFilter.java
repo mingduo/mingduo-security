@@ -13,7 +13,7 @@ import java.io.IOException;
 public class TimeFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        System.out.println("init");
+        System.out.println("time filter init");
     }
 
     @Override
@@ -29,7 +29,7 @@ public class TimeFilter implements Filter {
 
     @Override
     public void destroy() {
-        System.out.println("destroy");
+        System.out.println("time filter destroy");
 
     }
 }
