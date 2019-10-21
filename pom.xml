@@ -8,7 +8,7 @@
 
     <groupId>com.mingduo.security</groupId>
     <artifactId>mingduo-security</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.0.1-SNAPSHOT</version>
     <description>seucurity demo</description>
     <packaging>pom</packaging>
 
