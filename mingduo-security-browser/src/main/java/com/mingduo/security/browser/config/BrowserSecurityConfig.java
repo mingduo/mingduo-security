@@ -8,6 +8,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 /**
  * @author : weizc
@@ -21,6 +23,10 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     SecurityProperites securityProperites;
+    @Autowired
+    AuthenticationFailureHandler authenticationFailureHandler;
+    @Autowired
+    AuthenticationSuccessHandler authenticationSuccessHandler;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -32,9 +38,12 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
         http.formLogin()
                 .loginPage("/authentication/require")
                 .loginProcessingUrl("/authentication/form")
+                .successHandler(authenticationSuccessHandler)
+                .failureHandler(authenticationFailureHandler)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/authentication/require", securityProperites.getBrowser().getSignInPage())
+                .antMatchers("/authentication/require"
+                        , securityProperites.getBrowser().getSignInPage())
                 .permitAll()
                 .anyRequest()
                 .authenticated()
