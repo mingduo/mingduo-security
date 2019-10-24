@@ -5,10 +5,12 @@ import com.mingduo.security.demo.dto.User;
 import com.mingduo.security.demo.dto.UserQueryCondition;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.Authentication;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,9 +23,19 @@ import java.util.List;
  * @description:
  * @since 2019/10/14
  */
+@Slf4j
 @RestController
 @RequestMapping("/user")
 public class UserController {
+
+
+    @GetMapping("/me")
+    public Object getCurrentUser(/*@AuthenticationPrincipal UserDetails*/ Authentication user){
+        log.info("authentication:{}",ReflectionToStringBuilder.toString(user,ToStringStyle.MULTI_LINE_STYLE));
+        //user= SecurityContextHolder.getContext().getAuthentication();
+        return user;
+    }
+
 
     @ApiOperation("查询用户信息")
     @GetMapping
@@ -58,7 +70,7 @@ public class UserController {
     }
 
 
-    @PostMapping("/create")
+    @PostMapping
     public User create(@RequestBody @Valid User user/*, BindingResult bindingResult*/) {
 /*
         if(bindingResult.hasErrors()){
@@ -77,7 +89,7 @@ public class UserController {
     }
 
 
-    @PutMapping("/update/{id:\\d+}")
+    @PutMapping("/{id:\\d+}")
     public User update(@Valid @RequestBody User user, BindingResult errors) {
 
 
@@ -92,7 +104,7 @@ public class UserController {
 
 
 
-    @DeleteMapping("/delete/{id:\\d+}")
+    @DeleteMapping("/{id:\\d+}")
     public void delete(@PathVariable @ApiParam("用户id") String id){
         System.out.println("id = [" + id + "]");
     }

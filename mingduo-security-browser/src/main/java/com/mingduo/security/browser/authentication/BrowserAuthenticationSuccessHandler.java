@@ -3,9 +3,7 @@ package com.mingduo.security.browser.authentication;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mingduo.security.core.properties.LoginResponseType;
 import com.mingduo.security.core.properties.SecurityProperites;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -25,9 +23,8 @@ import java.io.PrintWriter;
  * @description:
  * @since 2019/10/22
  */
-@Slf4j
 @Component
-public class MyAuthenticationSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
+public class BrowserAuthenticationSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
     @Autowired
     private SecurityProperites securityProperites;
     @Autowired
@@ -37,11 +34,11 @@ public class MyAuthenticationSuccessHandler extends SavedRequestAwareAuthenticat
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         LoginResponseType signInResponseType = securityProperites.getBrowser().getSignInResponseType();
 
-        log.info("登录成功");
+        logger.info("登录成功");
         if (LoginResponseType.JSON.equals(signInResponseType)) {
             response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
             PrintWriter writer = response.getWriter();
-            writer.println(objectMapper.writeValueAsString(new ResponseEntity<>(authentication, HttpStatus.UNAUTHORIZED)));
+            writer.println(objectMapper.writeValueAsString(ResponseEntity.ok(authentication)));
             writer.flush();
         } else {
             // 否则跳转页面

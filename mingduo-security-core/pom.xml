@@ -13,7 +13,7 @@
     <artifactId>mingduo-security-core</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>mingduo-security-core</name>
-    <description>Demo project for Spring Boot</description>
+    <description>security核心模块</description>
 
     <properties>
         <java.version>1.8</java.version>
@@ -83,7 +83,10 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
 
     </dependencies>
 

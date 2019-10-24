@@ -20,4 +20,8 @@ public class BrowserProperties {
      * 登录响应的方式，默认是json
      */
     private LoginResponseType signInResponseType=LoginResponseType.JSON;
+    /**
+     * '记住我'功能的有效时间，默认1小时
+     */
+    private int rememberMeSeconds = 3600;
 }

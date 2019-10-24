@@ -5,7 +5,9 @@ import com.mingduo.security.core.properties.LoginResponseType;
 import com.mingduo.security.core.properties.SecurityProperites;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
@@ -22,7 +24,7 @@ import java.io.IOException;
  */
 @Component
 @Slf4j
-public class MyAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
+public class BrowserAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
 
     @Autowired
     private SecurityProperites securityProperites;
@@ -33,9 +35,12 @@ public class MyAuthenticationFailureHandler extends SimpleUrlAuthenticationFailu
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
         if (LoginResponseType.JSON.equals(securityProperites.getBrowser().getSignInResponseType())) {
             response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
-            response.getWriter().println(objectMapper.writeValueAsString(exception));
+
+            ResponseEntity responseEntity = new ResponseEntity<>( exception.getMessage(),HttpStatus.UNAUTHORIZED);
+            response.getWriter().println(objectMapper.writeValueAsString(responseEntity));
             response.getWriter().flush();
         } else {
+            super.setDefaultFailureUrl(securityProperites.getBrowser().getSignInPage());
             super.onAuthenticationFailure(request, response, exception);
         }
     }

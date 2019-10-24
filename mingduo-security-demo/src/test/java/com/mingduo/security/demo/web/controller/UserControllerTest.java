@@ -82,7 +82,7 @@ public class UserControllerTest {
                 "\"password\": \"demoData\"," +
                 "  \"birthday\": " + date.getTime() + "}";
 
-        String result = mockMvc.perform(MockMvcRequestBuilders.post("/user/create")
+        String result = mockMvc.perform(MockMvcRequestBuilders.post("/user")
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(content))
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -102,7 +102,7 @@ public class UserControllerTest {
                 "\"password\": null," +
                 "  \"birthday\": " + date.getTime() + "}";
 
-        String result = mockMvc.perform(MockMvcRequestBuilders.post("/user/create")
+        String result = mockMvc.perform(MockMvcRequestBuilders.post("/user")
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(content))
                 // .andExpect(MockMvcResultMatchers.status().isOk())
@@ -122,7 +122,7 @@ public class UserControllerTest {
                 "\"password\": \"demoData\"," +
                 "  \"birthday\": " + date.getTime() + "}";
 
-        String result = mockMvc.perform(MockMvcRequestBuilders.put("/user/update/1")
+        String result = mockMvc.perform(MockMvcRequestBuilders.put("/user/1")
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(content))
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -135,7 +135,7 @@ public class UserControllerTest {
 
     @Test
     public void whenDeleteSuccess() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.delete("/user/delete/1")
+        mockMvc.perform(MockMvcRequestBuilders.delete("/user/1")
         .content(MediaType.APPLICATION_JSON_UTF8_VALUE)
         ).andExpect(MockMvcResultMatchers.status().isOk());
     }

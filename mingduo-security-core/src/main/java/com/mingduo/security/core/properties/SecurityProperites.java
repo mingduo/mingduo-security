@@ -18,4 +18,8 @@ public class SecurityProperites {
      * 浏览器配置项
      */
     BrowserProperties browser=new BrowserProperties();
+    /**
+     * 验证码配置
+     */
+    ValidateCodeProperties code=new ValidateCodeProperties();
 }
