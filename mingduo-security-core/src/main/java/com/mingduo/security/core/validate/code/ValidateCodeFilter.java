@@ -1,8 +1,8 @@
 package com.mingduo.security.core.validate.code;
 
 import com.mingduo.security.core.properties.SecurityProperites;
-import com.mingduo.security.core.validate.code.controller.ValidateCodeController;
 import com.mingduo.security.core.validate.code.image.ImageCode;
+import com.mingduo.security.core.validate.code.impl.AbstractValidateCodeProcessor;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.InitializingBean;
@@ -74,7 +74,7 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
 
     private void validate(ServletWebRequest webRequest) throws ServletRequestBindingException {
 
-        ImageCode codeInSession = (ImageCode) sessionStrategy.getAttribute(webRequest, ValidateCodeController.SEESSION_KEY);
+        ImageCode codeInSession = (ImageCode) sessionStrategy.getAttribute(webRequest, AbstractValidateCodeProcessor.SEESSION_KEY);
 
         String codeInRequest = ServletRequestUtils.getStringParameter(webRequest.getRequest(), "imageCode");
         //验证码为空
@@ -86,7 +86,7 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
         }
 
         if (codeInSession.isExpire()) {
-            sessionStrategy.removeAttribute(webRequest, ValidateCodeController.SEESSION_KEY);
+            sessionStrategy.removeAttribute(webRequest, AbstractValidateCodeProcessor.SEESSION_KEY);
             throw new ValidateCodeException("验证码失效");
         }
         //验证码不匹配
@@ -94,7 +94,7 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
             throw new ValidateCodeException("验证码不匹配");
         }
 
-        sessionStrategy.removeAttribute(webRequest, ValidateCodeController.SEESSION_KEY);
+        sessionStrategy.removeAttribute(webRequest, AbstractValidateCodeProcessor.SEESSION_KEY);
 
     }
 

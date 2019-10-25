@@ -1,5 +1,6 @@
-package com.mingduo.security.core.validate.code.image;
+package com.mingduo.security.core.validate.code;
 
+import com.mingduo.security.core.validate.code.sms.ValidateCode;
 import org.springframework.web.context.request.ServletWebRequest;
 
 /**
@@ -15,5 +16,5 @@ public interface ValidateCodeGenerator {
      * @param request
      * @return
      */
-    ImageCode generate(ServletWebRequest request);
+    ValidateCode generate(ServletWebRequest request);
 }

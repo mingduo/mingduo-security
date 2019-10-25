@@ -3,14 +3,14 @@ package com.mingduo.security.core.properties;
 import lombok.Data;
 
 /**
- * 
+ *  图片验证码配置项
  * @description:
  * @since 2019/10/24
  * @author : weizc 
  */
 
 @Data
-public class ImageCodeProperties {
+public class ImageCodeProperties extends SmsCodeProperties{
 
     /**
      * 图片宽
@@ -21,18 +21,7 @@ public class ImageCodeProperties {
      */
     private int height = 23;
 
-    /**
-     * 验证码长度
-     */
-    private int length=4;
-
-    /**
-     * 过期时间
-     */
-    private int expireIn = 60;
-
-    /**
-     * 要拦截的url，多个url用逗号隔开，ant pattern
-     */
-    private String url;
+    public ImageCodeProperties() {
+        setLength(4);
+    }
 }

@@ -17,4 +17,9 @@ public class ValidateCodeProperties {
      */
     private ImageCodeProperties image = new ImageCodeProperties();
 
+    /**
+     * 短信验证码配置
+     */
+    private SmsCodeProperties sms=new SmsCodeProperties();
+
 }
