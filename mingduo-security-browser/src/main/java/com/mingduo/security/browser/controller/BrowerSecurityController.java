@@ -1,5 +1,6 @@
 package com.mingduo.security.browser.controller;
 
+import com.mingduo.security.core.constants.SecurityConstants;
 import com.mingduo.security.core.properties.SecurityProperites;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -37,7 +38,7 @@ public class BrowerSecurityController {
     private SecurityProperites securityProperites;
 
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
-    @RequestMapping("/authentication/require")
+    @RequestMapping(SecurityConstants.DEFAULT_LOGIN_PAGE)
     public ResponseEntity requireAuthentication(HttpServletRequest request, HttpServletResponse response) throws IOException {
         SavedRequest savedRequest = requestCache.getRequest(request, response);
         if(savedRequest!=null) {

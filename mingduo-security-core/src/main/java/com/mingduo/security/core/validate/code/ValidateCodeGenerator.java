@@ -1,6 +1,5 @@
 package com.mingduo.security.core.validate.code;
 
-import com.mingduo.security.core.validate.code.sms.ValidateCode;
 import org.springframework.web.context.request.ServletWebRequest;
 
 /**

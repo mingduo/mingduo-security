@@ -1,6 +1,7 @@
 package com.mingduo.security.core.validate.code.sms;
 
-import com.mingduo.security.core.properties.SecurityConstants;
+import com.mingduo.security.core.constants.SecurityConstants;
+import com.mingduo.security.core.validate.code.ValidateCode;
 import com.mingduo.security.core.validate.code.impl.AbstractValidateCodeProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -14,7 +15,7 @@ import org.springframework.web.context.request.ServletWebRequest;
  * @since 2019/10/25
  * @author : weizc 
  */
-@Component
+@Component("smsCodeValidateCodeProcessor")
 public class SmsCodeProcessor extends AbstractValidateCodeProcessor {
     /**
      * 短信验证码发送器
@@ -29,5 +30,6 @@ public class SmsCodeProcessor extends AbstractValidateCodeProcessor {
         smsCodeSender.send(mobile,validateCode.getCode());
     }
 
-  
+
+
 }

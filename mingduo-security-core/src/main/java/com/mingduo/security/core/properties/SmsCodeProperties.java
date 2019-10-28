@@ -19,7 +19,7 @@ public class SmsCodeProperties {
     /**
      * 过期时间
      */
-    private int expireIn = 60;
+    private int expireIn = 60*60;
 
     /**
      * 要拦截的url，多个url用逗号隔开，ant pattern

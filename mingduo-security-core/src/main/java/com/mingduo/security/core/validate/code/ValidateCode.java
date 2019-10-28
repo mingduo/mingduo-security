@@ -1,4 +1,4 @@
-package com.mingduo.security.core.validate.code.sms;
+package com.mingduo.security.core.validate.code;
 
 import lombok.Data;
 

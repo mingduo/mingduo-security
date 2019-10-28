@@ -1,6 +1,7 @@
 package com.mingduo.security.core.validate.code.sms;
 
 import com.mingduo.security.core.properties.SecurityProperites;
+import com.mingduo.security.core.validate.code.ValidateCode;
 import com.mingduo.security.core.validate.code.ValidateCodeGenerator;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

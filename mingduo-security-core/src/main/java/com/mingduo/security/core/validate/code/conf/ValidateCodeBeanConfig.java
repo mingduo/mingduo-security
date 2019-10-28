@@ -1,7 +1,7 @@
 package com.mingduo.security.core.validate.code.conf;
 
 import com.mingduo.security.core.validate.code.ValidateCodeGenerator;
-import com.mingduo.security.core.validate.code.image.ImageGenerator;
+import com.mingduo.security.core.validate.code.image.ImageCodeGenerator;
 import com.mingduo.security.core.validate.code.sms.DefaultSmsCodeSender;
 import com.mingduo.security.core.validate.code.sms.SmsCodeSender;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -27,7 +27,7 @@ public class ValidateCodeBeanConfig {
     @ConditionalOnMissingBean(name = "imageValidateCodeGenerator")
     @Bean
     public ValidateCodeGenerator imageValidateCodeGenerator() {
-        ImageGenerator imageGenerator = new ImageGenerator();
+        ImageCodeGenerator imageGenerator = new ImageCodeGenerator();
         return imageGenerator;
     }
 

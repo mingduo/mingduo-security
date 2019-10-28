@@ -1,6 +1,6 @@
 package com.mingduo.security.core.validate.code.image;
 
-import com.mingduo.security.core.validate.code.sms.ValidateCode;
+import com.mingduo.security.core.validate.code.ValidateCode;
 import lombok.Getter;
 import lombok.Setter;
 
