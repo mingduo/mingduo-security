@@ -40,7 +40,7 @@ public class BrowserAuthenticationFailureHandler extends SimpleUrlAuthentication
             response.getWriter().println(objectMapper.writeValueAsString(responseEntity));
             response.getWriter().flush();
         } else {
-            super.setDefaultFailureUrl(securityProperites.getBrowser().getSignInPage());
+          //  super.setDefaultFailureUrl(securityProperites.getBrowser().getSignInPage());
             super.onAuthenticationFailure(request, response, exception);
         }
     }

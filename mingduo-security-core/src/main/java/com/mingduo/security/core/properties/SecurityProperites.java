@@ -5,10 +5,11 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 /**
- *  安全配置项
+ * 安全配置项
+ *
+ * @author : weizc
  * @description:
  * @since 2019/10/21
- * @author : weizc 
  */
 @Data
 @Configuration
@@ -17,9 +18,14 @@ public class SecurityProperites {
     /**
      * 浏览器配置项
      */
-    BrowserProperties browser=new BrowserProperties();
+    BrowserProperties browser = new BrowserProperties();
     /**
      * 验证码配置
      */
-    ValidateCodeProperties code=new ValidateCodeProperties();
+    ValidateCodeProperties code = new ValidateCodeProperties();
+    /**
+     * 社交登录配置
+     */
+    SocialProperties social = new SocialProperties();
+
 }

@@ -17,10 +17,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.springframework.social.security.SpringSocialConfigurer;
 
 import javax.sql.DataSource;
 
 /**
+ * 浏览器环境下安全配置主类
+ *
  * @author : weizc
  * @description:
  * @since 2019/10/18
@@ -32,25 +35,21 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     SecurityProperites securityProperites;
-
-
     @Autowired
     ValidateCodeFilter validateCodeFilter;
-
-
     @Autowired
     DataSource dataSource;
-
     @Autowired
     UserDetailsService userDetailsService;
-
-
     @Autowired
     SmsAuthenticationSecurityConfig smsAuthenticationSecurityConfig;
     @Autowired
     ValidateCodeSecurityConfig validateCodeSecurityConfig;
     @Autowired
     FormAuthenticationConfig formAuthenticationConfig;
+
+    @Autowired
+    SpringSocialConfigurer socialConfigurer;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -93,6 +92,7 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf()
                 .disable();
 
+        http.apply(socialConfigurer);
         http.apply(smsAuthenticationSecurityConfig);
         http.apply(validateCodeSecurityConfig);
 
