@@ -2,6 +2,7 @@ package com.mingduo.security.core.social.qq.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
 import org.springframework.social.oauth2.TokenStrategy;
@@ -13,6 +14,7 @@ import java.io.IOException;
  * @description:
  * @since 2019/10/30
  */
+@Slf4j
 @Data
 public class QQImpl extends AbstractOAuth2ApiBinding implements QQ {
 
@@ -36,7 +38,7 @@ public class QQImpl extends AbstractOAuth2ApiBinding implements QQ {
     /**
      * 申请QQ登录成功后，分配给应用的appid
      */
-    private String oauthConsumerKey;
+    private String appId;
     /**
      * 用户的ID，与QQ号码一一对应。
      * 可通过调用https://graph.qq.com/oauth2.0/me?access_token=YOUR_ACCESS_TOKEN 来获取。
@@ -45,10 +47,10 @@ public class QQImpl extends AbstractOAuth2ApiBinding implements QQ {
 
     private ObjectMapper objectMapper=new ObjectMapper();
 
-    public QQImpl(String accessToken, String oauthConsumerKey) {
+    public QQImpl(String accessToken, String appId) {
         //默认TokenStrategy.AUTHORIZATION_HEADER 从请求头获取
         super(accessToken, TokenStrategy.ACCESS_TOKEN_PARAMETER);
-        this.oauthConsumerKey = oauthConsumerKey;
+        this.appId = appId;
 
 //callback("client_id":"1105192975","openid":"AF4AFE3AE56D12EF1BB88BC6AAC86AEF"});
         String getOpenIdUrl = String.format(URL_GET_OPENID, accessToken);
@@ -58,14 +60,14 @@ public class QQImpl extends AbstractOAuth2ApiBinding implements QQ {
 
         String openId = StringUtils.substringBetween(result, "\"openid\":\"", "\"}");
 
-        System.out.println(result);
+        log.info("openid:"+result);
 
         this.openid = openId;
     }
 
     @Override
     public QQUserInfo getUserInfo() {
-        String getUserInfoUrl = String.format(URL_GET_USER_INFO, this.oauthConsumerKey,this.openid);
+        String getUserInfoUrl = String.format(URL_GET_USER_INFO, this.appId,this.openid);
         // 获取用户信息
         String result = this.getRestTemplate().getForObject(getUserInfoUrl, String.class);
 
@@ -76,7 +78,7 @@ public class QQImpl extends AbstractOAuth2ApiBinding implements QQ {
             // 将返回的JSON String读到QQUserInfo对象中
             qqUserInfo = objectMapper.readValue(result, QQUserInfo.class);
 
-            qqUserInfo.setOpenId(this.getOpenid());
+            qqUserInfo.setOpenId(this.openid);
         } catch (IOException e) {
             throw new RuntimeException("获取用户信息失败", e);
         }

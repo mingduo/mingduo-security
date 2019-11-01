@@ -14,12 +14,11 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <spring-cloud.version>Finchley.SR2</spring-cloud.version>
+        <spring-cloud.version>Greenwich.SR3</spring-cloud.version>
         <spring.io.version>Cairo-SR7</spring.io.version>
         <mingduo.security.version>0.0.1-SNAPSHOT</mingduo.security.version>
 
     </properties>
-
 
 
     <modules>
@@ -32,17 +31,27 @@
 
     <dependencyManagement>
         <dependencies>
+            <!--
+                        2019.4停止维护
+            -->
+            <!--           <dependency>
+                           <groupId>io.spring.platform</groupId>
+                           <artifactId>platform-bom</artifactId>
+                           <version>Cairo-SR7</version>
+                           <type>pom</type>
+                           <scope>import</scope>
+                       </dependency>-->
             <dependency>
-                <groupId>io.spring.platform</groupId>
-                <artifactId>platform-bom</artifactId>
-                <version>Cairo-SR7</version>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
             <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>Greenwich.SR3</version>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-parent</artifactId>
+                <version>2.1.9.RELEASE</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
