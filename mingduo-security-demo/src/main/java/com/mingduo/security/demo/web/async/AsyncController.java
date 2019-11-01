@@ -36,7 +36,7 @@ public class AsyncController {
         DeferredResult<String> result = new DeferredResult<>();
         deferredResultHolder.getMap().put(orderNum, result);
 
-   /*     Callable<String> result = new Callable<String>() {
+   /*     Callable<String> result = new Callaible<String>() {
             @Override
             public String call() throws Exception {
                 log.info("副线程开始" );
