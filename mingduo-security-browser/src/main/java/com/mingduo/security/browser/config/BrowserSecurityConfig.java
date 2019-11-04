@@ -84,7 +84,9 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(SecurityConstants.DEFAULT_LOGIN_PAGE
                         , securityProperites.getBrowser().getSignInPage(),
-                        SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/*")
+                        SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/*",
+                        securityProperites.getBrowser().getSignUpUrl(),
+                        "/user/register")
                 .permitAll()
                 .anyRequest()
                 .authenticated()

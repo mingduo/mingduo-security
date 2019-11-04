@@ -2,6 +2,7 @@ package com.mingduo.security.browser.controller;
 
 import com.mingduo.security.core.constants.SecurityConstants;
 import com.mingduo.security.core.properties.SecurityProperites;
+import com.mingduo.security.core.social.support.SocialUserInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +13,13 @@ import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
+import org.springframework.social.connect.Connection;
+import org.springframework.social.connect.web.ProviderSignInUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.ServletWebRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,6 +42,9 @@ public class BrowerSecurityController {
     @Autowired
     private SecurityProperites securityProperites;
 
+    @Autowired
+    private ProviderSignInUtils providerSignInUtils;
+
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @RequestMapping(SecurityConstants.DEFAULT_LOGIN_PAGE)
     public ResponseEntity requireAuthentication(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -49,5 +57,22 @@ public class BrowerSecurityController {
             }
         }
         return ResponseEntity.ok("访问的服务需要身份认证，请引导用户到登录页");
+    }
+
+    /**
+     * 用户第一次社交登录时，会引导用户进行用户注册或绑定，此服务用于在注册或绑定页面获取社交网站用户信息
+     *
+     * @param request
+     * @return
+     */
+    @GetMapping(SecurityConstants.DEFAULT_SOCIAL_USER_INFO_URL)
+    public SocialUserInfo getSocialUserInfo(HttpServletRequest request){
+        Connection<?> connection = providerSignInUtils.getConnectionFromSession(new ServletWebRequest(request));
+
+        return new SocialUserInfo()
+                .setProviderId(connection.getKey().getProviderId())
+                .setProviderUserId(connection.getKey().getProviderUserId())
+                .setNickName(connection.getDisplayName())
+                .setHeading(connection.getImageUrl());
     }
 }
