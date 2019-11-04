@@ -22,9 +22,7 @@ public class WeixinConnectionFactory extends OAuth2ConnectionFactory<Weixin> {
     @Override
     protected String extractProviderUserId(AccessGrant accessGrant) {
         WeixinAccessGrant weixinAccessGrant = (WeixinAccessGrant) accessGrant;
-        WeixinApiAdapter weixinApiAdapter = (WeixinApiAdapter) this.getApiAdapter();
 
-        weixinAccessGrant.setOpenId(weixinAccessGrant.getOpenId());
-        return null;
+        return weixinAccessGrant.getOpenId();
     };
 }
