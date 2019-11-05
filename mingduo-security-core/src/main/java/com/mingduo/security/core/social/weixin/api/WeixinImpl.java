@@ -8,6 +8,8 @@ import org.springframework.social.oauth2.TokenStrategy;
 import java.io.IOException;
 
 /**
+ *
+ * Weixin API调用模板， scope为Request的Spring bean, 根据当前用户的accessToken创建。
  * @author : weizc
  * @description:
  * @since 2019/10/31
@@ -34,7 +36,7 @@ public class WeixinImpl extends AbstractOAuth2ApiBinding implements Weixin {
         String url = String.format(URL_GET_USER_INFO, openId);
         String result = this.getRestTemplate().getForObject(url, String.class);
 
-        log.info("result:" + result);
+        log.info("获取微信登录信息 result:" + result);
         WeixinUserInfo userInfo = null;
         try {
             userInfo = objectMapper.readValue(result, WeixinUserInfo.class);

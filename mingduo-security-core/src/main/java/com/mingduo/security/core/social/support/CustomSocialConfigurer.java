@@ -28,6 +28,7 @@ public class CustomSocialConfigurer extends SpringSocialConfigurer {
         SocialAuthenticationFilter socialAuthenticationFilter = ((SocialAuthenticationFilter) super.postProcess(object));
         // SocialAuthenticationFilter过滤器默认拦截的请求是/auth开头，这里是修改为自己配置的
         socialAuthenticationFilter.setFilterProcessesUrl(filterProcessesUrl);
+        //todo 配置登录成功 失败处理器 支持  json
         return (T) socialAuthenticationFilter;
     }
 }

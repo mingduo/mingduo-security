@@ -26,8 +26,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * 
- * @description:
+ *
+ * 浏览器环境下与安全相关的服务
  * @since 2019/10/21
  * @author : weizc 
  */
@@ -45,6 +45,14 @@ public class BrowerSecurityController {
     @Autowired
     private ProviderSignInUtils providerSignInUtils;
 
+    /**
+     * 当需要身份认证时，跳转到这里
+     *
+     * @param request
+     * @param response
+     * @return
+     * @throws IOException
+     */
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @RequestMapping(SecurityConstants.DEFAULT_LOGIN_PAGE)
     public ResponseEntity requireAuthentication(HttpServletRequest request, HttpServletResponse response) throws IOException {

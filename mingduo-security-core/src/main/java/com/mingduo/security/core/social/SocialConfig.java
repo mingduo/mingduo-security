@@ -6,10 +6,12 @@ import com.mingduo.security.core.properties.WeixinProperties;
 import com.mingduo.security.core.social.qq.api.QQ;
 import com.mingduo.security.core.social.qq.connect.QQConnectionFactory;
 import com.mingduo.security.core.social.support.CustomSocialConfigurer;
+import com.mingduo.security.core.social.support.SocialConnectionSignUp;
 import com.mingduo.security.core.social.weixin.api.Weixin;
 import com.mingduo.security.core.social.weixin.connect.WeixinConnectionFactory;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,6 +23,7 @@ import org.springframework.social.config.annotation.EnableSocial;
 import org.springframework.social.config.annotation.SocialConfigurerAdapter;
 import org.springframework.social.connect.ConnectionFactory;
 import org.springframework.social.connect.ConnectionFactoryLocator;
+import org.springframework.social.connect.ConnectionSignUp;
 import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository;
 import org.springframework.social.connect.web.ProviderSignInUtils;
@@ -30,6 +33,9 @@ import org.springframework.social.security.SpringSocialConfigurer;
 import javax.sql.DataSource;
 
 /**
+ *
+ * 社交登录配置主类
+ *
  * @author : weizc
  * @description:
  * @since 2019/10/30
@@ -49,14 +55,26 @@ public class SocialConfig extends SocialConfigurerAdapter {
 
     @Autowired
     private ObjectProvider<ConnectionFactory<Weixin>> weixinConnectionFactory;
+    @Autowired
+    ConnectionSignUp connectionSignUp;
 
     @Override
     public UsersConnectionRepository getUsersConnectionRepository(ConnectionFactoryLocator connectionFactoryLocator) {
+        // 第三个参数是对插入到数据库中的数据做加密，这里为了看的清楚，没有做任何处理，即noOpText
         JdbcUsersConnectionRepository connectionRepository = new JdbcUsersConnectionRepository(dataSource, connectionFactoryLocator, Encryptors.noOpText());
+        // 为表名增加前缀
         connectionRepository.setTablePrefix("tbl_");
+        //设置 newUserId 实现社交用户自动登录
+        // setConnectionSignUp（connectionSignUp()） 会根据 bean-name =connectionSignUp 查找
+        connectionRepository.setConnectionSignUp(connectionSignUp);
         return connectionRepository;
     }
 
+    @ConditionalOnMissingBean(ConnectionSignUp.class)
+    @Bean
+    public ConnectionSignUp connectionSignUp(){
+        return new SocialConnectionSignUp();
+    }
 
     @Override
     public void addConnectionFactories(ConnectionFactoryConfigurer connectionFactoryConfigurer, Environment environment) {
@@ -77,7 +95,10 @@ public class SocialConfig extends SocialConfigurerAdapter {
         return new QQConnectionFactory(qqProperties.getProviderId(), qqProperties.getAppId(), qqProperties.getAppSecret());
     }
 
-
+    /**
+     * 社交登录配置类，供浏览器或app模块引入设计登录配置用。
+     * @return
+     */
     @ConditionalOnProperty(prefix = "my.security.social.weixin", name = "app-id")
     @Bean
     public ConnectionFactory<Weixin> weixinConnectionFactory() {
@@ -95,7 +116,7 @@ public class SocialConfig extends SocialConfigurerAdapter {
     }
 
     /**
-     *
+     * 用来处理注册流程的工具类
      * @param locator
      * @return
      */

@@ -1,6 +1,5 @@
 package com.mingduo.security.core.social.qq.connect;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -21,21 +20,15 @@ import java.util.List;
 @Slf4j
 public class QQOauth2Template extends OAuth2Template {
 
-    ObjectMapper objectMapper = new ObjectMapper();
 
     public QQOauth2Template(String clientId, String clientSecret, String authorizeUrl, String accessTokenUrl) {
         super(clientId, clientSecret, authorizeUrl, accessTokenUrl);
-        setUseParametersForClientAuthentication(true);
-    }
-
-    public QQOauth2Template(String clientId, String clientSecret, String authorizeUrl, String authenticateUrl, String accessTokenUrl) {
-        super(clientId, clientSecret, authorizeUrl, authenticateUrl, accessTokenUrl);
         /**
          * 发请求的时候携带参数
          */
         setUseParametersForClientAuthentication(true);
-
     }
+
 
 
     @Override

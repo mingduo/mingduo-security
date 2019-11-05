@@ -71,7 +71,7 @@ public class QQImpl extends AbstractOAuth2ApiBinding implements QQ {
         // 获取用户信息
         String result = this.getRestTemplate().getForObject(getUserInfoUrl, String.class);
 
-        System.out.println(result);
+        log.info("qq获取用户信息 result:{}",result);
 
         QQUserInfo qqUserInfo = null;
         try {
