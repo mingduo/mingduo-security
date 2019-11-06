@@ -1,5 +1,6 @@
 package com.mingduo.security.demo.web.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,6 +24,7 @@ import java.util.Date;
  * @description:
  * @since 2019/10/14
  */
+@Slf4j
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class UserControllerTest {
@@ -49,7 +51,7 @@ public class UserControllerTest {
                 .andReturn()
                 .getResponse().getContentAsString();
 
-        System.out.println(result);
+        log.info(result);
     }
 
 
@@ -61,7 +63,7 @@ public class UserControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.username").value("tom")
                 ).andReturn().getResponse().getContentAsString();
 
-        System.out.println(result);
+        log.info(result);
     }
 
 
@@ -90,7 +92,7 @@ public class UserControllerTest {
                 .andReturn()
                 .getResponse().getContentAsString();
 
-        System.out.println(result);
+        log.info(result);
 
     }
 
@@ -110,7 +112,7 @@ public class UserControllerTest {
                 .andReturn()
                 .getResponse().getContentAsString();
 
-        System.out.println(result);
+        log.info(result);
 
     }
 
@@ -129,7 +131,7 @@ public class UserControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id").value("1"))
                 .andReturn().getResponse().getContentAsString();
 
-        System.out.println(result);
+        log.info(result);
     }
 
 
@@ -149,6 +151,6 @@ public class UserControllerTest {
         ).andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn().getResponse().getContentAsString();
 
-        System.out.println(result);
+        log.info(result);
     }
 }

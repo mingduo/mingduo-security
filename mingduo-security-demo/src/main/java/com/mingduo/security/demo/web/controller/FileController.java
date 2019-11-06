@@ -1,6 +1,7 @@
 package com.mingduo.security.demo.web.controller;
 
 import com.mingduo.security.demo.dto.FileInfo;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,7 @@ import java.io.InputStream;
  * @description:
  * @since 2019/10/17
  */
+@Slf4j
 @RequestMapping("/file")
 @RestController
 public class FileController {
@@ -31,9 +33,9 @@ public class FileController {
 
     @PostMapping
     public FileInfo upload(MultipartFile file) throws IOException {
-        System.out.println(file.getName());
-        System.out.println(file.getOriginalFilename());
-        System.out.println(file.getSize());
+        log.info(file.getName());
+        log.info(file.getOriginalFilename());
+        log.info(""+file.getSize());
 
 
         File localFile = new File(FOLDER, System.currentTimeMillis() + ".txt");

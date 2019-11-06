@@ -54,12 +54,12 @@ public class UserController {
     @GetMapping
     public List<User> query(UserQueryCondition condition, @PageableDefault(page = 1, size = 15, sort = "username,desc") Pageable pageable) {
 
-        System.out.println(ReflectionToStringBuilder
+        log.info(ReflectionToStringBuilder
                 .toString(condition, ToStringStyle.MULTI_LINE_STYLE));
 
-        System.out.println(pageable.getPageNumber());
-        System.out.println(pageable.getPageSize());
-        System.out.println(pageable.getSort());
+        log.info(""+pageable.getPageNumber());
+        log.info(""+pageable.getPageSize());
+        log.info(""+pageable.getSort());
 
 
         List<User> userList = new ArrayList<>(4);
@@ -75,7 +75,7 @@ public class UserController {
     @JsonView(User.UserSimpleView.class)
     @GetMapping("/{id:\\d+}")
     public User getInfo(@PathVariable String id) {
-        System.out.println("进入getInfo服务");
+        log.info("进入getInfo服务");
 
         User user = new User();
         user.setUsername("tom");
@@ -88,11 +88,11 @@ public class UserController {
 /*
         if(bindingResult.hasErrors()){
             bindingResult.getFieldErrors().stream()
-                    .forEach(error-> System.out.println(error.getDefaultMessage()));
+                    .forEach(error-> log.info(error.getDefaultMessage()));
         }
 */
 
-        System.out.println(ReflectionToStringBuilder
+        log.info(ReflectionToStringBuilder
                 .toString(user, ToStringStyle.MULTI_LINE_STYLE));
 
         user.setId("1");
@@ -107,7 +107,7 @@ public class UserController {
 
 
 
-        System.out.println(ReflectionToStringBuilder
+        log.info(ReflectionToStringBuilder
                 .toString(user, ToStringStyle.MULTI_LINE_STYLE));
 
         user.setId("1");
@@ -119,6 +119,6 @@ public class UserController {
 
     @DeleteMapping("/{id:\\d+}")
     public void delete(@PathVariable @ApiParam("用户id") String id){
-        System.out.println("id = [" + id + "]");
+        log.info("id = [" + id + "]");
     }
 }

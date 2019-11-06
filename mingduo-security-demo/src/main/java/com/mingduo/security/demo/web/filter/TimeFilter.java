@@ -1,35 +1,37 @@
 package com.mingduo.security.demo.web.filter;
 
+import lombok.extern.slf4j.Slf4j;
+
 import javax.servlet.*;
 import java.io.IOException;
 
 /**
- * 
+ * @author : weizc
  * @description:
  * @since 2019/10/17
- * @author : weizc 
  */
 //@Component
+@Slf4j
 public class TimeFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        System.out.println("time filter init");
+        log.info("time filter init");
     }
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain) throws IOException, ServletException {
-        System.out.println("time filter start");
+        log.info("time filter start");
         long before = System.currentTimeMillis();
         chain.doFilter(servletRequest, servletResponse);
-        System.out.printf("time filter 耗时:%d \n",System.currentTimeMillis()-before);
-        System.out.println("time filter finish");
+        System.out.printf("time filter 耗时:%d \n", System.currentTimeMillis() - before);
+        log.info("time filter finish");
 
     }
 
 
     @Override
     public void destroy() {
-        System.out.println("time filter destroy");
+        log.info("time filter destroy");
 
     }
 }

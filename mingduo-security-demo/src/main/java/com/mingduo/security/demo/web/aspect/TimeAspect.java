@@ -1,5 +1,6 @@
 package com.mingduo.security.demo.web.aspect;
 
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -13,6 +14,7 @@ import org.springframework.util.StopWatch;
  * @since 2019/10/17
  * @author : weizc 
  */
+@Slf4j
 @Aspect
 @Component
 public class TimeAspect {
@@ -28,16 +30,16 @@ public class TimeAspect {
 
         Object[] args = pjp.getArgs();
         for(Object arg:args){
-            System.out.println("arg is "+arg);
+            log.info("arg is "+arg);
         }
         StopWatch stopWatch=new StopWatch();
         stopWatch.start();
         Object object = pjp.proceed();
 
         stopWatch.stop();
-        System.out.println(stopWatch.prettyPrint());
+        log.info(stopWatch.prettyPrint());
 
-        System.out.println("time aspect end");
+        log.info("time aspect end");
 
         return object;
     }

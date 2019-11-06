@@ -74,6 +74,10 @@ public class WeixinOauth2Template extends OAuth2Template {
 
     }
 
+    @Override
+    public String buildAuthorizeUrl(OAuth2Parameters parameters) {
+        return buildAuthenticateUrl(parameters);
+    }
     /**
      * 获取 access_token
      *

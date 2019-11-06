@@ -38,7 +38,7 @@ public class BrowserAuthenticationSuccessHandler extends SavedRequestAwareAuthen
         if (LoginResponseType.JSON.equals(signInResponseType)) {
             response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
             PrintWriter writer = response.getWriter();
-            writer.println(objectMapper.writeValueAsString(ResponseEntity.ok(authentication)));
+            writer.println(objectMapper.writeValueAsString(ResponseEntity.ok(authentication.getPrincipal())));
             writer.flush();
         } else {
             // 否则跳转页面
