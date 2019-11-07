@@ -33,7 +33,7 @@ import java.io.IOException;
  */
 @Slf4j
 @RestController
-public class BrowerSecurityController {
+public class BrowserSecurityController {
 
     private RequestCache requestCache=new HttpSessionRequestCache();
 
@@ -82,5 +82,11 @@ public class BrowerSecurityController {
                 .setProviderUserId(connection.getKey().getProviderUserId())
                 .setNickName(connection.getDisplayName())
                 .setHeading(connection.getImageUrl());
+    }
+
+
+    @GetMapping("/session/invalid")
+    public ResponseEntity invalidSession(){
+        return new ResponseEntity("session失效", HttpStatus.UNAUTHORIZED);
     }
 }

@@ -15,8 +15,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.springframework.security.web.session.InvalidSessionStrategy;
+import org.springframework.security.web.session.SessionInformationExpiredStrategy;
 import org.springframework.social.security.SpringSocialConfigurer;
 
 import javax.sql.DataSource;
@@ -50,6 +53,12 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     SpringSocialConfigurer socialConfigurer;
+    @Autowired
+    InvalidSessionStrategy invalidSessionStrategy;
+    @Autowired
+    SessionInformationExpiredStrategy sessionInformationExpiredStrategy;
+    @Autowired
+    LogoutSuccessHandler logoutSuccessHandler;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -86,11 +95,29 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
                         , securityProperites.getBrowser().getSignInPage(),
                         SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/*",
                         securityProperites.getBrowser().getSignUpUrl(),
-                        "/user/register")
+                       // securityProperites.getBrowser().getSignOutPage(),
+                        "/user/register",
+                        securityProperites.getBrowser().getSession().getSessionInvalidUrl())
                 .permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
+                //logout处理
+                .logout()
+                .logoutUrl("/signOut")
+                .logoutSuccessHandler(logoutSuccessHandler)
+                .deleteCookies("JSESSIONID")
+                .and()
+                //session配置策略
+                .sessionManagement()
+              //  .invalidSessionUrl("/session/invalid")
+               .invalidSessionStrategy(invalidSessionStrategy)
+                .maximumSessions(securityProperites.getBrowser().getSession().getMaximumSessions())
+                .maxSessionsPreventsLogin(securityProperites.getBrowser().getSession().isMaxSessionsPreventsLogin())
+                .expiredSessionStrategy(sessionInformationExpiredStrategy)
+        ;
+
+        http
                 .csrf()
                 .disable();
 

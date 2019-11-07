@@ -40,6 +40,10 @@ public interface SecurityConstants {
      * 获取第三方用户信息的url
      */
     String DEFAULT_SOCIAL_USER_INFO_URL = "/social/user";
+    /**
+     * session失效默认的跳转地址
+     */
+    String DEFAULT_SESSION_INVALID_URL="/browser-session-invalid.html";
 
     /**
      * 验证图片验证码时，http请求中默认的携带图片验证码信息的参数的名称

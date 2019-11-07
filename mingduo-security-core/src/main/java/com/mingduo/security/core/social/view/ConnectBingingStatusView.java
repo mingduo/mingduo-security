@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
  * @since 2019/11/6
  */
 @Component("connect/status")
-public class ConnectStatusView extends AbstractView {
+public class ConnectBingingStatusView extends AbstractView {
 
     @Autowired
     ObjectMapper objectMapper;

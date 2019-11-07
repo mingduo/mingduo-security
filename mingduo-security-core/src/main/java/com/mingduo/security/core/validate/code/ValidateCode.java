@@ -1,5 +1,6 @@
 package com.mingduo.security.core.validate.code;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
  * @since 2019/10/25
  * @author : weizc 
  */
+@AllArgsConstructor
 @Data
 public class ValidateCode implements Serializable {
 

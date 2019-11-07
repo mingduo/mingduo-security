@@ -7,7 +7,6 @@ import org.springframework.web.servlet.view.AbstractView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  *
@@ -34,10 +33,10 @@ public class WeixinConnectView extends AbstractView {
     protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) throws Exception {
         response.setContentType("text/html;charset=UTF-8");
         /**
-         * 有connection是绑定
+         * 有 connections 是绑定
          * 没有是解绑
          */
-        if(Objects.nonNull(model.get("connection"))){
+        if(model.containsKey("connections")){
             response.getWriter().write("<h3>绑定成功</h3>");
         }else {
             response.getWriter().write("<h3>解绑成功</h3>");
