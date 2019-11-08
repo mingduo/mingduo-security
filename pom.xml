@@ -24,9 +24,12 @@
 
     <modules>
         <module>mingduo-security-core</module>
+
         <module>mingduo-security-authorize</module>
         <module>mingduo-security-demo</module>
+
         <module>mingduo-security-browser</module>
+        <module>mingduo-security-app</module>
 
     </modules>
 
