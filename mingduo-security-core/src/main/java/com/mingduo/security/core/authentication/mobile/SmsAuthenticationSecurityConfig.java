@@ -9,7 +9,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.DefaultSecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.security.web.authentication.RememberMeServices;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
@@ -36,7 +35,8 @@ public class SmsAuthenticationSecurityConfig extends SecurityConfigurerAdapter<D
         smsAuthenticationFilter.setAuthenticationSuccessHandler(authenticationSuccessHandler);
         smsAuthenticationFilter.setAuthenticationFailureHandler(authenticationFailureHandler);
         smsAuthenticationFilter.setAuthenticationManager(http.getSharedObject(AuthenticationManager.class));
-        smsAuthenticationFilter.setRememberMeServices(http.getSharedObject(RememberMeServices.class));
+    // 短信登录没有记住我功能
+        //    smsAuthenticationFilter.setRememberMeServices(http.getSharedObject(RememberMeServices.class));
 
         SmsAuthenticationProvider smsAuthenticationProvider=new SmsAuthenticationProvider();
         smsAuthenticationProvider.setUserDetailsService(userDetailsService);

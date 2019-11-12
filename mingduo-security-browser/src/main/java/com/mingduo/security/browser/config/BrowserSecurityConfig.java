@@ -117,8 +117,9 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
                 .disable();
 
         http.apply(socialConfigurer);
+        //短信登录
         http.apply(smsAuthenticationSecurityConfig);
+        //图片/短信验证码
         http.apply(validateCodeSecurityConfig);
-
     }
 }
