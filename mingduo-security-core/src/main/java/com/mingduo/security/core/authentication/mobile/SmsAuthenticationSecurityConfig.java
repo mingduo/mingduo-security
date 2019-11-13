@@ -12,11 +12,10 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
- *
  * 短信登录配置
  *
+ * @author : weizc
  * @since 2019/10/28
- * @author : weizc 
  */
 @Configuration
 public class SmsAuthenticationSecurityConfig extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
@@ -31,14 +30,14 @@ public class SmsAuthenticationSecurityConfig extends SecurityConfigurerAdapter<D
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        SmsAuthenticationFilter smsAuthenticationFilter=new SmsAuthenticationFilter();
+        SmsAuthenticationFilter smsAuthenticationFilter = new SmsAuthenticationFilter();
         smsAuthenticationFilter.setAuthenticationSuccessHandler(authenticationSuccessHandler);
         smsAuthenticationFilter.setAuthenticationFailureHandler(authenticationFailureHandler);
         smsAuthenticationFilter.setAuthenticationManager(http.getSharedObject(AuthenticationManager.class));
-    // 短信登录没有记住我功能
+        // 短信登录没有记住我功能
         //    smsAuthenticationFilter.setRememberMeServices(http.getSharedObject(RememberMeServices.class));
 
-        SmsAuthenticationProvider smsAuthenticationProvider=new SmsAuthenticationProvider();
+        SmsAuthenticationProvider smsAuthenticationProvider = new SmsAuthenticationProvider();
         smsAuthenticationProvider.setUserDetailsService(userDetailsService);
 
         http.authenticationProvider(smsAuthenticationProvider)

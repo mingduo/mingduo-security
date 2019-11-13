@@ -12,7 +12,7 @@ import org.springframework.web.context.request.ServletWebRequest;
  */
 public interface ValidateCodeProcessor {
 
-    String SEESSION_KEY = "SEESSION_KEY_VALIDATE_CODE_";
+
 
     /**
      * 创建校验码

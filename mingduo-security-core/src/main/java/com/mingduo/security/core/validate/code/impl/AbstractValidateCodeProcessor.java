@@ -1,15 +1,10 @@
 package com.mingduo.security.core.validate.code.impl;
 
 import com.mingduo.security.core.constants.ValidateCodeType;
-import com.mingduo.security.core.validate.code.ValidateCodeException;
-import com.mingduo.security.core.validate.code.ValidateCodeGenerator;
-import com.mingduo.security.core.validate.code.ValidateCodeProcessor;
-import com.mingduo.security.core.validate.code.ValidateCode;
+import com.mingduo.security.core.validate.code.*;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.social.connect.web.HttpSessionSessionStrategy;
-import org.springframework.social.connect.web.SessionStrategy;
 import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.context.request.ServletWebRequest;
@@ -39,7 +34,8 @@ public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> impl
     @Autowired
     Map<String, ValidateCodeGenerator> validateCodeGenerators;
 
-    protected SessionStrategy sessionStrategy = new HttpSessionSessionStrategy();
+    @Autowired
+    private ValidateCodeRepository validateCodeRepository;
 
     /**
      * @param request
@@ -104,16 +100,15 @@ public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> impl
     private void save(ServletWebRequest request, C validateCode) {
         //设置session
         ValidateCode code = new ValidateCode(validateCode.getCode(), validateCode.getExpireTime());
-        sessionStrategy.setAttribute(request, SEESSION_KEY + getProcessorType(request).toUpperCase(), code);
+        ValidateCodeType codeType = ValidateCodeType.valueOf(getProcessorType(request).toUpperCase());
+        validateCodeRepository.save(request,codeType,code);
     }
 
 
     @Override
     public void validate(ServletWebRequest request) throws AuthenticationException {
         ValidateCodeType validateCode = ValidateCodeType.valueOf(getProcessorType(request).toUpperCase());
-        String sessionName = SEESSION_KEY + validateCode.name();
-
-        C codeInSession = (C) sessionStrategy.getAttribute(request, sessionName);
+        ValidateCode codeInSession = validateCodeRepository.get(request, validateCode);
 
         String codeInRequest;
         try {
@@ -130,7 +125,7 @@ public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> impl
         }
 
         if (codeInSession.isExpire()) {
-            sessionStrategy.removeAttribute(request, sessionName);
+            validateCodeRepository.remove(request,validateCode);
             throw new ValidateCodeException("验证码失效");
         }
         //验证码不匹配
@@ -138,7 +133,7 @@ public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> impl
             throw new ValidateCodeException("验证码不匹配");
         }
 
-        sessionStrategy.removeAttribute(request, sessionName);
+        validateCodeRepository.remove(request,validateCode);
     }
 
 }
