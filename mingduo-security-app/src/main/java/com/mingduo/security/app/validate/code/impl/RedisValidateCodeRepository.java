@@ -23,14 +23,13 @@ import java.util.concurrent.TimeUnit;
 public class RedisValidateCodeRepository implements ValidateCodeRepository {
 
     @Autowired
-    RedisTemplate<String,Object> redisTemplate;
+    RedisTemplate redisTemplate;
 
     @Override
     public void save(ServletWebRequest request, ValidateCodeType codeType, ValidateCode code) {
         String key = buildKey(request, codeType);
-        redisTemplate.opsForValue().set(key,code,30, TimeUnit.MINUTES);
+        redisTemplate.opsForValue().set(key, code, 30, TimeUnit.MINUTES);
     }
-
 
 
     @Override
@@ -46,16 +45,16 @@ public class RedisValidateCodeRepository implements ValidateCodeRepository {
     }
 
     /**
-     *
      * @param request
      * @param codeType
      * @return
      */
     private String buildKey(ServletWebRequest request, ValidateCodeType codeType) {
         String deviceId = request.getHeader("deviceId");
-        if(StringUtils.hasText(deviceId)){
-            throw new ValidateCodeException("请求中校验码为空");
+        if (StringUtils.hasText(deviceId)) {
+            return "code:" + codeType.name() + ":" + deviceId;
         }
-        return "code:"+codeType.name()+":"+deviceId;
+        throw new ValidateCodeException("请求中deviceId为空");
+
     }
 }
