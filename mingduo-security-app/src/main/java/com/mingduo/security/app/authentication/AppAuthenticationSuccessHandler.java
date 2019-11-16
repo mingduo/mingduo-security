@@ -22,7 +22,7 @@ import java.util.Base64;
 import java.util.Collections;
 
 /**
- * 成功处理器
+ * APP环境下认证成功处理器
  *
  * @author : weizc
  * @description:

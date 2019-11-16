@@ -18,7 +18,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.security.crypto.encrypt.Encryptors;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.social.UserIdSource;
 import org.springframework.social.config.annotation.ConnectionFactoryConfigurer;
 import org.springframework.social.config.annotation.EnableSocial;
@@ -56,8 +55,7 @@ public class SocialConfig extends SocialConfigurerAdapter {
     private ObjectProvider<ConnectionFactory<Weixin>> weixinConnectionFactory;
     @Autowired(required = false)
     ConnectionSignUp connectionSignUp;
-    @Autowired
-    AuthenticationSuccessHandler successHandler;
+
 
 
     @Override
@@ -113,7 +111,7 @@ public class SocialConfig extends SocialConfigurerAdapter {
     @Bean
     public SpringSocialConfigurer socialConfigurer() {
 
-        SpringSocialConfigurer socialConfigurer = new CustomSocialConfigurer(securityProperites.getSocial().getFilterProcessesUrl(), successHandler);
+        SpringSocialConfigurer socialConfigurer = new CustomSocialConfigurer(securityProperites.getSocial().getFilterProcessesUrl());
         socialConfigurer.signupUrl(securityProperites.getBrowser().getSignUpUrl());
         return socialConfigurer;
     }

@@ -27,7 +27,10 @@ public interface SecurityConstants {
      * 默认的手机验证码登录请求处理url
      */
     String DEFAULT_SIGN_IN_PROCESSING_URL_MOBILE = "/authentication/mobile";
-
+    /**
+     * 默认的OPENID登录请求处理url
+     */
+    String DEFAULT_SIGN_IN_PROCESSING_URL_OEPNID = "/authentication/openId";
 
     /**
      * 默认登录页面

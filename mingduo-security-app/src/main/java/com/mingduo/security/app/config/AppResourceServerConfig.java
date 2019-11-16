@@ -1,5 +1,6 @@
 package com.mingduo.security.app.config;
 
+import com.mingduo.security.app.authentication.openid.OpenIdAuthenticationSecurityConfig;
 import com.mingduo.security.core.authentication.FormAuthenticationConfig;
 import com.mingduo.security.core.authentication.mobile.SmsAuthenticationSecurityConfig;
 import com.mingduo.security.core.constants.SecurityConstants;
@@ -30,6 +31,9 @@ public class AppResourceServerConfig extends ResourceServerConfigurerAdapter {
     @Autowired
     FormAuthenticationConfig formAuthenticationConfig;
     @Autowired
+    OpenIdAuthenticationSecurityConfig openIdAuthenticationSecurityConfig;
+
+    @Autowired
     SpringSocialConfigurer socialConfigurer;
 
 
@@ -58,11 +62,13 @@ public class AppResourceServerConfig extends ResourceServerConfigurerAdapter {
         http
                 .csrf()
                 .disable();
-
+        //社交登录
         http.apply(socialConfigurer);
         //短信登录
         http.apply(smsAuthenticationSecurityConfig);
         // 图片/短信验证码
         http.apply(validateCodeSecurityConfig);
+        //app openId登录
+        http.apply(openIdAuthenticationSecurityConfig);
     }
 }

@@ -1,8 +1,6 @@
 package com.mingduo.security.app.authentication;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mingduo.security.core.properties.LoginResponseType;
-import com.mingduo.security.core.properties.SecurityProperites;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
+ *  APP环境下认证失败处理器
  * @author : weizc
  * @description:
  * @since 2019/10/22
@@ -27,21 +26,15 @@ import java.io.IOException;
 public class AppAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
 
     @Autowired
-    private SecurityProperites securityProperites;
-    @Autowired
     private ObjectMapper objectMapper;
 
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
-        if (LoginResponseType.JSON.equals(securityProperites.getBrowser().getSignInResponseType())) {
             response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
 
             ResponseEntity responseEntity = new ResponseEntity<>( exception.getMessage(),HttpStatus.UNAUTHORIZED);
             response.getWriter().println(objectMapper.writeValueAsString(responseEntity));
             response.getWriter().flush();
-        } else {
-            super.setDefaultFailureUrl(securityProperites.getBrowser().getSignInPage());
-            super.onAuthenticationFailure(request, response, exception);
-        }
+
     }
 }

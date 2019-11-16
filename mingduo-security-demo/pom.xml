@@ -19,7 +19,7 @@
 
     <dependencies>
         <!-- 使用browser打开下面两个依赖，或者不依赖authorize，而是依赖core，但是要把browser的DemoUserDetailsService中的注解打开-->
-   <!--     <dependency>
+ <!--       <dependency>
             <groupId>com.mingduo.security</groupId>
             <artifactId>mingduo-security-browser</artifactId>
             <version>${mingduo.security.version}</version>
