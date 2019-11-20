@@ -43,6 +43,7 @@ public class QQUserInfo {
     private String is_lost;
     private String nickname;
     private String gender;
+    private String gender_type;
     private String province;
     private String city;
     private String year;

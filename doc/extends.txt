@@ -19,10 +19,10 @@ org.springframework.security.web.session.SessionInformationExpiredStrategy
 org.springframework.security.web.authentication.logout.LogoutSuccessHandler
 
 7.短信发送的处理逻辑
-com.imooc.security.core.validate.code.sms.SmsCodeSender
+com.mingduo.security.core.validate.code.sms.SmsCodeSender
 
 8.向spring容器注册名为imageValidateCodeGenerator的bean，可以替换默认的图片验证码生成逻辑,bean必须实现以下接口
-com.imooc.security.core.validate.code.ValidateCodeGenerator
+com.mingduo.security.core.validate.code.ValidateCodeGenerator
 
 9.如果spring容器中有下面这个接口的实现，则在社交登录无法确认用户时，用此接口的实现自动注册用户，不会跳到注册页面
 org.springframework.social.connect.ConnectionSignUp

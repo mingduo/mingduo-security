@@ -5,13 +5,12 @@ package com.mingduo.security.demo.security;
 
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionSignUp;
-import org.springframework.stereotype.Component;
 
 /**
  * @author weizc
  * 在实现了QQ登录之后,自动帮用户注册,保存注册信息在数据库中
  */
-@Component
+//@Component
 public class DemoConnectionSignUp implements ConnectionSignUp {
 
 

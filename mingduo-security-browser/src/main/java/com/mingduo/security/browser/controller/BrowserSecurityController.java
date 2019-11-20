@@ -2,6 +2,7 @@ package com.mingduo.security.browser.controller;
 
 import com.mingduo.security.core.constants.SecurityConstants;
 import com.mingduo.security.core.properties.SecurityProperites;
+import com.mingduo.security.core.social.controller.SocialController;
 import com.mingduo.security.core.social.support.SocialUserInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -33,7 +34,7 @@ import java.io.IOException;
  */
 @Slf4j
 @RestController
-public class BrowserSecurityController {
+public class BrowserSecurityController extends SocialController {
 
     private RequestCache requestCache=new HttpSessionRequestCache();
 
@@ -77,11 +78,7 @@ public class BrowserSecurityController {
     public SocialUserInfo getSocialUserInfo(HttpServletRequest request){
         Connection<?> connection = providerSignInUtils.getConnectionFromSession(new ServletWebRequest(request));
 
-        return new SocialUserInfo()
-                .setProviderId(connection.getKey().getProviderId())
-                .setProviderUserId(connection.getKey().getProviderUserId())
-                .setNickName(connection.getDisplayName())
-                .setHeading(connection.getImageUrl());
+        return buildSocialUserInfo(connection);
     }
 
 

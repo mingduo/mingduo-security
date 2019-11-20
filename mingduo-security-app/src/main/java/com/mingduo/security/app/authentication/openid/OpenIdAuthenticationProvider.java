@@ -16,16 +16,15 @@ import java.util.Collections;
 import java.util.Set;
 
 /**
- *  @since 2019/11/16
  * @author :    weizc
+ * @since 2019/11/16
  */
 @NoArgsConstructor
 @AllArgsConstructor
 public class OpenIdAuthenticationProvider implements AuthenticationProvider {
-     UserDetailsService userDetailsService;
+    UserDetailsService userDetailsService;
+
     UsersConnectionRepository usersConnectionRepository;
-
-
 
 
     @Override
@@ -42,7 +41,7 @@ public class OpenIdAuthenticationProvider implements AuthenticationProvider {
 
         }
 
-        String userId=userIds.iterator().next();
+        String userId = userIds.iterator().next();
 
         UserDetails userDetails = userDetailsService.loadUserByUsername(userId);
         if (userDetails == null) {

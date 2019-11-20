@@ -85,4 +85,7 @@ public class QQImpl extends AbstractOAuth2ApiBinding implements QQ {
 
         return qqUserInfo;
     }
+
+
 }
+

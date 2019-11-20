@@ -9,7 +9,7 @@ import org.springframework.social.security.SocialAuthenticationFilter;
 import org.springframework.social.security.SpringSocialConfigurer;
 
 /**
- * 
+ *  实现social 配置
  * @description:
  * @since 2019/10/31
  * @author : weizc 
@@ -17,7 +17,7 @@ import org.springframework.social.security.SpringSocialConfigurer;
 @Data
 public class CustomSocialConfigurer extends SpringSocialConfigurer {
 
-    private final String filterProcessesUrl;
+    private String filterProcessesUrl;
 
     private  AuthenticationSuccessHandler successHandler;
     @Autowired(required = false)

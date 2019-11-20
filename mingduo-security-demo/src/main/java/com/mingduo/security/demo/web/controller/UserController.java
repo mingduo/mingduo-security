@@ -1,6 +1,7 @@
 package com.mingduo.security.demo.web.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.mingduo.security.app.social.AppSignUpUtils;
 import com.mingduo.security.demo.dto.User;
 import com.mingduo.security.demo.dto.UserQueryCondition;
 import io.swagger.annotations.ApiOperation;
@@ -32,19 +33,25 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
 
-
+    @Autowired(required = false)
+    AppSignUpUtils appSignUpUtils;
     @Autowired
     ProviderSignInUtils providerSignInUtils;
 
     @PostMapping("/register")
-    public void register(User user, HttpServletRequest request){
+    public void register(User user, HttpServletRequest request) {
         //不管是注册用户还是绑定用户，都会拿到一个用户唯一标识。
-        providerSignInUtils.doPostSignUp(user.getUsername(), new ServletWebRequest(request));
+        if (appSignUpUtils == null) {
+            providerSignInUtils.doPostSignUp(user.getUsername(), new ServletWebRequest(request));
+        } else {
+            //社交登录注册
+            appSignUpUtils.doPostSignUp(user.getUsername(), new ServletWebRequest(request));
+        }
     }
 
     @GetMapping("/me")
-    public Object getCurrentUser(/*@AuthenticationPrincipal UserDetails*/ Authentication user){
-        log.info("authentication:{}",ReflectionToStringBuilder.toString(user,ToStringStyle.MULTI_LINE_STYLE));
+    public Object getCurrentUser(/*@AuthenticationPrincipal UserDetails*/ Authentication user) {
+        log.info("authentication:{}", ReflectionToStringBuilder.toString(user, ToStringStyle.MULTI_LINE_STYLE));
         //user= SecurityContextHolder.getContext().getAuthentication();
         return user;
     }
@@ -57,9 +64,9 @@ public class UserController {
         log.info(ReflectionToStringBuilder
                 .toString(condition, ToStringStyle.MULTI_LINE_STYLE));
 
-        log.info(""+pageable.getPageNumber());
-        log.info(""+pageable.getPageSize());
-        log.info(""+pageable.getSort());
+        log.info("" + pageable.getPageNumber());
+        log.info("" + pageable.getPageSize());
+        log.info("" + pageable.getSort());
 
 
         List<User> userList = new ArrayList<>(4);
@@ -106,7 +113,6 @@ public class UserController {
     public User update(@Valid @RequestBody User user, BindingResult errors) {
 
 
-
         log.info(ReflectionToStringBuilder
                 .toString(user, ToStringStyle.MULTI_LINE_STYLE));
 
@@ -116,9 +122,8 @@ public class UserController {
     }
 
 
-
     @DeleteMapping("/{id:\\d+}")
-    public void delete(@PathVariable @ApiParam("用户id") String id){
+    public void delete(@PathVariable @ApiParam("用户id") String id) {
         log.info("id = [" + id + "]");
     }
 }

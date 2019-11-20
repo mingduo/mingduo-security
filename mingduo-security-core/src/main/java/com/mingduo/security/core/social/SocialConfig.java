@@ -6,7 +6,6 @@ import com.mingduo.security.core.properties.WeixinProperties;
 import com.mingduo.security.core.social.qq.api.QQ;
 import com.mingduo.security.core.social.qq.connect.QQConnectionFactory;
 import com.mingduo.security.core.social.support.CustomSocialConfigurer;
-import com.mingduo.security.core.social.support.SocialConnectionSignUp;
 import com.mingduo.security.core.social.view.WeixinConnectView;
 import com.mingduo.security.core.social.weixin.api.Weixin;
 import com.mingduo.security.core.social.weixin.connect.WeixinConnectionFactory;
@@ -30,6 +29,7 @@ import org.springframework.social.security.AuthenticationNameUserIdSource;
 import org.springframework.social.security.SpringSocialConfigurer;
 
 import javax.sql.DataSource;
+import java.util.List;
 
 /**
  * 社交登录配置主类
@@ -49,13 +49,12 @@ public class SocialConfig extends SocialConfigurerAdapter {
     private SecurityProperites securityProperites;
 
     @Autowired
-    private ObjectProvider<ConnectionFactory<QQ>> qqConnectionFactory;
+    private ObjectProvider<List<ConnectionFactory<?>>> qqConnectionFactorys;
 
-    @Autowired
-    private ObjectProvider<ConnectionFactory<Weixin>> weixinConnectionFactory;
+    /*@Autowired
+    private ObjectProvider<ConnectionFactory<Weixin>> weixinConnectionFactory;*/
     @Autowired(required = false)
     ConnectionSignUp connectionSignUp;
-
 
 
     @Override
@@ -70,16 +69,20 @@ public class SocialConfig extends SocialConfigurerAdapter {
         return connectionRepository;
     }
 
+    /* 打开后会自动注册
     @ConditionalOnMissingBean(ConnectionSignUp.class)
     @Bean
     public ConnectionSignUp connectionSignUp() {
         return new SocialConnectionSignUp();
     }
-
+*/
     @Override
     public void addConnectionFactories(ConnectionFactoryConfigurer connectionFactoryConfigurer, Environment environment) {
-        qqConnectionFactory.ifAvailable(conectFactory -> connectionFactoryConfigurer.addConnectionFactory(conectFactory));
-        weixinConnectionFactory.ifAvailable(conectFactory -> connectionFactoryConfigurer.addConnectionFactory(conectFactory));
+
+        qqConnectionFactorys.ifAvailable(t->t.forEach(conectFactory ->
+                connectionFactoryConfigurer.addConnectionFactory(conectFactory)));
+       // qqConnectionFactory.ifAvailable(conectFactory -> connectionFactoryConfigurer.addConnectionFactory(conectFactory));
+      //  weixinConnectionFactory.ifAvailable(conectFactory -> connectionFactoryConfigurer.addConnectionFactory(conectFactory));
 
     }
 
@@ -129,21 +132,24 @@ public class SocialConfig extends SocialConfigurerAdapter {
 
     /**
      * 用于 绑定 和 解绑 的 controller
+     *
      * @param locator
      * @return
      */
     @Bean
-    public ConnectController connectControllerConnectController(ConnectionFactoryLocator locator,ConnectionRepository connectionRepository){
+    public ConnectController connectControllerConnectController(ConnectionFactoryLocator locator, ConnectionRepository connectionRepository) {
         ConnectController connectController = new ConnectController(locator, connectionRepository);
         //connectController.setc
         return connectController;
     }
 
-
-
-    @Bean(name ={ "connect/weixin", "connect/weixinConnected"})
+    /**
+     * bean Name view
+     * @return
+     */
+    @Bean(name = {"connect/weixin", "connect/weixinConnected"})
     @ConditionalOnMissingBean(name = "weixinConnectedView")
-    public WeixinConnectView weixinConnectedView(){
+    public WeixinConnectView weixinConnectedView() {
         return new WeixinConnectView();
     }
 }

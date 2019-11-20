@@ -52,7 +52,8 @@ public class AppResourceServerConfig extends ResourceServerConfigurerAdapter {
                         securityProperites.getBrowser().getSignUpUrl(),
                         // securityProperites.getBrowser().getSignOutPage(),
                         "/user/register",
-                        securityProperites.getBrowser().getSession().getSessionInvalidUrl())
+                        securityProperites.getBrowser().getSession().getSessionInvalidUrl(),
+                        SecurityConstants.DEFAULT_SOCIAL_USER_INFO_URL)
                 .permitAll()
                 .anyRequest()
                 .authenticated()
