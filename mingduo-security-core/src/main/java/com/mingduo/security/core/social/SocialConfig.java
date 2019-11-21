@@ -49,7 +49,7 @@ public class SocialConfig extends SocialConfigurerAdapter {
     private SecurityProperites securityProperites;
 
     @Autowired
-    private ObjectProvider<List<ConnectionFactory<?>>> qqConnectionFactorys;
+    private ObjectProvider<List<ConnectionFactory<?>>> connectionFactorys;
 
     /*@Autowired
     private ObjectProvider<ConnectionFactory<Weixin>> weixinConnectionFactory;*/
@@ -79,7 +79,7 @@ public class SocialConfig extends SocialConfigurerAdapter {
     @Override
     public void addConnectionFactories(ConnectionFactoryConfigurer connectionFactoryConfigurer, Environment environment) {
 
-        qqConnectionFactorys.ifAvailable(t->t.forEach(conectFactory ->
+        connectionFactorys.ifAvailable(t->t.forEach(conectFactory ->
                 connectionFactoryConfigurer.addConnectionFactory(conectFactory)));
        // qqConnectionFactory.ifAvailable(conectFactory -> connectionFactoryConfigurer.addConnectionFactory(conectFactory));
       //  weixinConnectionFactory.ifAvailable(conectFactory -> connectionFactoryConfigurer.addConnectionFactory(conectFactory));

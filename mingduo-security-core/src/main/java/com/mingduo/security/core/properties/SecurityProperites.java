@@ -27,5 +27,8 @@ public class SecurityProperites {
      * 社交登录配置
      */
     SocialProperties social = new SocialProperties();
-
+    /**
+     * OAuth2认证服务器配置
+     */
+    OAuth2Properties oauth2 =new OAuth2Properties();
 }

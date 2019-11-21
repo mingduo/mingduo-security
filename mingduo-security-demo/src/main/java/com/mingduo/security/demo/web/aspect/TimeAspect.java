@@ -26,7 +26,7 @@ public class TimeAspect {
     @Around("pointcut()")
     public Object handleMethod(ProceedingJoinPoint pjp) throws Throwable {
 
-        System.out.print("time aspect  start");
+        System.out.println("time aspect  start");
 
         Object[] args = pjp.getArgs();
         for(Object arg:args){

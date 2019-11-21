@@ -48,9 +48,19 @@ public class AppAuthenticationSuccessHandler extends SavedRequestAwareAuthentica
             throw new UnapprovedClientAuthenticationException("请求头中无client信息");
         }
 
+
+        /**
+         * copy from
+         * @see org.springframework.security.web.authentication.www.BasicAuthenticationFilter
+         */
         String[] tokens = extractAndDecodeHeader(header, request);
         String clientId = tokens[0];
         String secret = tokens[1];
+
+        /**
+         * copy from
+         * @see  org.springframework.security.oauth2.provider.endpoint.TokenEndpoint
+         */
         // 查询client 信息
         ClientDetails clientDetail = clientDetailsService.loadClientByClientId(clientId);
         if (clientDetail == null) {
