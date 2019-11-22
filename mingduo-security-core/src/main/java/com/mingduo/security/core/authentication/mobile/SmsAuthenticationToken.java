@@ -1,6 +1,7 @@
 package com.mingduo.security.core.authentication.mobile;
 
 import org.springframework.security.authentication.AbstractAuthenticationToken;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.SpringSecurityCoreVersion;
 
@@ -9,6 +10,8 @@ import java.util.Collection;
 /**
  *
  * 短信登录验证信息封装类
+ *
+ * @see  UsernamePasswordAuthenticationToken
  * @since 2019/10/28
  * @author : weizc 
  */

@@ -1,27 +1,37 @@
 package com.mingduo.security.demo.web.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.mingduo.security.app.social.AppSignUpUtils;
+import com.mingduo.security.core.properties.SecurityProperites;
 import com.mingduo.security.demo.dto.User;
 import com.mingduo.security.demo.dto.UserQueryCondition;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.jwt.JwtHelper;
+import org.springframework.security.oauth2.common.util.JsonParserFactory;
 import org.springframework.social.connect.web.ProviderSignInUtils;
+import org.springframework.util.ReflectionUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.ServletWebRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author : weizc
@@ -31,28 +41,57 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("/user")
-public class UserController {
+public class UserController implements ApplicationContextAware {
 
-    @Autowired(required = false)
-    AppSignUpUtils appSignUpUtils;
+
     @Autowired
     ProviderSignInUtils providerSignInUtils;
+
+    private ApplicationContext applicationContext;
+    @Autowired
+    private SecurityProperites securityProperites;
 
     @PostMapping("/register")
     public void register(User user, HttpServletRequest request) {
         //不管是注册用户还是绑定用户，都会拿到一个用户唯一标识。
-        if (appSignUpUtils == null) {
-            providerSignInUtils.doPostSignUp(user.getUsername(), new ServletWebRequest(request));
-        } else {
+        if (applicationContext.containsBean("appSignUpUtils")) {
             //社交登录注册
-            appSignUpUtils.doPostSignUp(user.getUsername(), new ServletWebRequest(request));
+            Object appSignUpUtils = applicationContext.getBean("appSignUpUtils");
+            Method doPostSignUp = ReflectionUtils.findMethod(appSignUpUtils.getClass(), "appSignUpUtils");
+            ReflectionUtils.invokeMethod(doPostSignUp, appSignUpUtils, new Object[]{user.getUsername(), new ServletWebRequest(request)});
+
+        } else {
+
+            providerSignInUtils.doPostSignUp(user.getUsername(), new ServletWebRequest(request));
+
         }
     }
 
+    /**
+     * @param user
+     * @param request
+     * @return
+     * @throws UnsupportedEncodingException
+     * @see org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter#enhance(org.springframework.security.oauth2.common.OAuth2AccessToken, org.springframework.security.oauth2.provider.OAuth2Authentication)
+     */
     @GetMapping("/me")
-    public Object getCurrentUser(/*@AuthenticationPrincipal UserDetails*/ Authentication user) {
+    public Object getCurrentUser(/*@AuthenticationPrincipal UserDetails*/ Authentication user, HttpServletRequest request) throws UnsupportedEncodingException {
         log.info("authentication:{}", ReflectionToStringBuilder.toString(user, ToStringStyle.MULTI_LINE_STYLE));
         //user= SecurityContextHolder.getContext().getAuthentication();
+
+        String authorization = request.getHeader("Authorization");
+        // 获取JWT
+        String token = StringUtils.substringAfter(authorization, "bearer").trim();
+
+        String claims = JwtHelper.decode(token).getClaims();
+
+        Map<String, Object> jwt = JsonParserFactory.create().parseMap(claims);
+        log.info("jwt claims:{}", jwt);
+        // 获取为JWT扩展的信息
+        String author = (String) jwt.get("author");
+
+        System.out.println(author);
+
         return user;
     }
 
@@ -125,5 +164,10 @@ public class UserController {
     @DeleteMapping("/{id:\\d+}")
     public void delete(@PathVariable @ApiParam("用户id") String id) {
         log.info("id = [" + id + "]");
+    }
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.applicationContext = applicationContext;
     }
 }

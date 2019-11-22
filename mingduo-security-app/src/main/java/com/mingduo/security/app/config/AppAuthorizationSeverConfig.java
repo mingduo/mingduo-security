@@ -2,6 +2,7 @@ package com.mingduo.security.app.config;
 
 import com.mingduo.security.core.properties.OAuth2ClientProperties;
 import com.mingduo.security.core.properties.SecurityProperites;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.oauth2.authserver.OAuth2AuthorizationServerConfiguration;
 import org.springframework.context.annotation.Configuration;
@@ -14,8 +15,12 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.token.AccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.TokenEnhancer;
+import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -44,17 +49,36 @@ public class AppAuthorizationSeverConfig extends AuthorizationServerConfigurerAd
     @Autowired
     TokenStore tokenStore;
 
+    @Autowired
+    List<TokenEnhancer> tokenEnhancers;
+    @Autowired
+    ObjectProvider<AccessTokenConverter> accessTokenConverter;
+
+
+    /**
+     * 认证及token配置
+     */
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
 
         endpoints.userDetailsService(userDetailsService)
                 .authenticationManager(authenticationConfiguration.getAuthenticationManager())
                 .tokenStore(tokenStore);
+
+        //
+        accessTokenConverter.ifAvailable(endpoints::accessTokenConverter);
+
+        // TokenEnhancerChain是增强器链
+        TokenEnhancerChain enhancerChain = new TokenEnhancerChain();
+        List<TokenEnhancer> enhancerChainList = new ArrayList<>(4);
+        enhancerChainList.addAll(tokenEnhancers);
+
+        enhancerChain.setTokenEnhancers(enhancerChainList);
+        endpoints.tokenEnhancer(enhancerChain);
     }
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-
     }
 
 

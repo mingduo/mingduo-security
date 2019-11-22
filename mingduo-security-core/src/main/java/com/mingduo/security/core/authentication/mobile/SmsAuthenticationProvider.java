@@ -16,6 +16,7 @@ import java.util.Objects;
  *
  * 由于短信验证码的验证在过滤器里已完成，这里直接读取用户信息即可。
  *
+ * @see  org.springframework.security.authentication.dao.DaoAuthenticationProvider
  * @author : weizc
  * @description:
  * @since 2019/10/28

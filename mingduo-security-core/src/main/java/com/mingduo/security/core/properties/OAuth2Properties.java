@@ -15,5 +15,7 @@ import java.util.List;
 public class OAuth2Properties {
 
 
+    private String signingKey="mingduo";
+
     List<OAuth2ClientProperties> client=new ArrayList<>();
 }
