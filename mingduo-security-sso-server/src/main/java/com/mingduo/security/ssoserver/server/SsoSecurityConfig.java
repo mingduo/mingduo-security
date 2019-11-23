@@ -21,9 +21,16 @@ public class SsoSecurityConfig extends WebSecurityConfigurerAdapter {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 
-
+    /**
+     *  /oauth/authorize 需要认证身份
+     * 需要创建   Creating filter chain
+     * @param http
+     * @throws Exception
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.formLogin();
+        http.authorizeRequests().anyRequest().authenticated();
     }
 
 

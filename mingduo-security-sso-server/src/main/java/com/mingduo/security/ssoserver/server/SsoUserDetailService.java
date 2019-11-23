@@ -23,6 +23,8 @@ public class SsoUserDetailService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         String password = passwordEncoder.encode("123");
-        return User.withUsername(username).password(password).roles("ROLE_USER").build();
+        //ROLE_USER cannot start with ROLE_ (it is automatically added)
+        return User.withUsername(username).password(password).roles("USER").build();
+        //				AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER"));
     }
 }
