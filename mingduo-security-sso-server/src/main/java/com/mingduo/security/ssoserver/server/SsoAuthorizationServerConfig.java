@@ -19,7 +19,7 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
  */
 @EnableAuthorizationServer// 有了这个注解，当前应用就是一个标准的OAuth2认证服务器
 @Configuration
-public class SsoAuthorizationServer implements AuthorizationServerConfigurer {
+public class SsoAuthorizationServerConfig  implements AuthorizationServerConfigurer {
 
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -43,19 +43,27 @@ public class SsoAuthorizationServer implements AuthorizationServerConfigurer {
         String secret = passwordEncoder.encode("123456");
 
         clients.inMemory().withClient("client1").secret(secret)
+                .redirectUris("http://localhost:8847/client1/login")
                 .authorizedGrantTypes("authorization_code", "refresh_token") // 支持的授权模式
                 .scopes("all")
+                //client 1 自动 跳过 / confirm/access 授权操作
+                .autoApprove("all")
                 .and().withClient("client2").secret(secret)
+                .redirectUris("http://localhost:8848/client2/login")
                 .authorizedGrantTypes("authorization_code", "refresh_token")
-                .scopes("all");
+                .scopes("all")
+        ;
     }
+
+
 
     // 认证服务器的安全配置，配置的 isAuthenticated() 是SpringSecurity的授权表达式，默认是 denyAll()，拒绝所有访问
     // 它的意思是访问访问认证服务器的tokenKey的时候，需要进行认证
     // tokenKey 就是对 JWT进行签名的key，
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-        endpoints.tokenStore(jwtTokenStore());
+        endpoints.tokenStore(jwtTokenStore()).accessTokenConverter(jwtAccessTokenConverter())
+        .tokenEnhancer(jwtAccessTokenConverter());
 
     }
 
