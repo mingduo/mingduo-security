@@ -79,19 +79,21 @@ public class UserController implements ApplicationContextAware {
         log.info("authentication:{}", ReflectionToStringBuilder.toString(user, ToStringStyle.MULTI_LINE_STYLE));
         //user= SecurityContextHolder.getContext().getAuthentication();
 
+        //app jwt 登录
         String authorization = request.getHeader("Authorization");
-        // 获取JWT
-        String token = StringUtils.substringAfter(authorization, "bearer").trim();
+        if (StringUtils.isNotBlank(authorization)) {
+            // 获取JWT
+            String token = StringUtils.substringAfter(authorization, "bearer").trim();
 
-        String claims = JwtHelper.decode(token).getClaims();
+            String claims = JwtHelper.decode(token).getClaims();
 
-        Map<String, Object> jwt = JsonParserFactory.create().parseMap(claims);
-        log.info("jwt claims:{}", jwt);
-        // 获取为JWT扩展的信息
-        String author = (String) jwt.get("author");
+            Map<String, Object> jwt = JsonParserFactory.create().parseMap(claims);
+            log.info("jwt claims:{}", jwt);
+            // 获取为JWT扩展的信息
+            String author = (String) jwt.get("author");
 
-        System.out.println(author);
-
+            System.out.println(author);
+        }
         return user;
     }
 

@@ -2,7 +2,7 @@ package com.mingduo.security.browser.config;
 
 import com.mingduo.security.core.authentication.FormAuthenticationConfig;
 import com.mingduo.security.core.authentication.mobile.SmsAuthenticationSecurityConfig;
-import com.mingduo.security.core.constants.SecurityConstants;
+import com.mingduo.security.core.authorization.AuthorizeConfigManager;
 import com.mingduo.security.core.properties.SecurityProperites;
 import com.mingduo.security.core.validate.code.ValidateCodeFilter;
 import com.mingduo.security.core.validate.code.conf.ValidateCodeSecurityConfig;
@@ -59,6 +59,8 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
     LogoutSuccessHandler logoutSuccessHandler;
 
 
+    @Autowired
+    AuthorizeConfigManager authorizeConfigManager;
 
     @Bean
     public PersistentTokenRepository persistentTokenRepository() {
@@ -85,18 +87,7 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
                 .tokenRepository(persistentTokenRepository())
                 .tokenValiditySeconds(securityProperites.getBrowser().getRememberMeSeconds())
                 .and()
-                .authorizeRequests()
-                .antMatchers(SecurityConstants.DEFAULT_LOGIN_PAGE
-                        , securityProperites.getBrowser().getSignInPage(),
-                        SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/*",
-                        securityProperites.getBrowser().getSignUpUrl(),
-                       // securityProperites.getBrowser().getSignOutPage(),
-                        "/user/register",
-                        securityProperites.getBrowser().getSession().getSessionInvalidUrl())
-                .permitAll()
-                .anyRequest()
-                .authenticated()
-                .and()
+
                 //logout处理
                 .logout()
                 .logoutUrl("/signOut")
@@ -121,5 +112,9 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
         http.apply(smsAuthenticationSecurityConfig);
         //图片/短信验证码
         http.apply(validateCodeSecurityConfig);
+
+
+
+        authorizeConfigManager.config(http.authorizeRequests());
     }
 }

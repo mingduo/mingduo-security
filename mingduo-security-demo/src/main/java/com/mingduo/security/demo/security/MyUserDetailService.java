@@ -11,6 +11,9 @@ import org.springframework.social.security.SocialUserDetails;
 import org.springframework.social.security.SocialUserDetailsService;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * @author : weizc
  * @description:
@@ -20,6 +23,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class MyUserDetailService implements UserDetailsService, SocialUserDetailsService {
 
+    List<String>adminRoleList= Arrays.asList("mingduo","weizichao");
     @Autowired
     PasswordEncoder passwordEncoder;
 
@@ -41,8 +45,12 @@ public class MyUserDetailService implements UserDetailsService, SocialUserDetail
         // 根据用户名查找用户信息
         //根据查找到的用户信息判断用户是否被冻结
         String password = passwordEncoder.encode("123");
-        log.info("数据库密码:{}",password);
+        log.info("数据库密码:{}", password);
+        String roleString = "ROLE_USER";
+        if (adminRoleList.contains(userId)) {
+            roleString = "ROLE_ADMIN,ROLE_USER";
+        }
         return new SocialUser(userId, password,
-                AuthorityUtils.commaSeparatedStringToAuthorityList("ADMIN,ROLE_USER"));
+                AuthorityUtils.commaSeparatedStringToAuthorityList(roleString));
     }
 }

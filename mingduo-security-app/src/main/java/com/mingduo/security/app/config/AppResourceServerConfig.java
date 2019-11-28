@@ -3,7 +3,7 @@ package com.mingduo.security.app.config;
 import com.mingduo.security.app.authentication.openid.OpenIdAuthenticationSecurityConfig;
 import com.mingduo.security.core.authentication.FormAuthenticationConfig;
 import com.mingduo.security.core.authentication.mobile.SmsAuthenticationSecurityConfig;
-import com.mingduo.security.core.constants.SecurityConstants;
+import com.mingduo.security.core.authorization.AuthorizeConfigManager;
 import com.mingduo.security.core.properties.SecurityProperites;
 import com.mingduo.security.core.validate.code.conf.ValidateCodeSecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +36,8 @@ public class AppResourceServerConfig extends ResourceServerConfigurerAdapter {
     @Autowired
     SpringSocialConfigurer socialConfigurer;
 
+    @Autowired
+    AuthorizeConfigManager authorizeConfigManager;
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
@@ -44,7 +46,7 @@ public class AppResourceServerConfig extends ResourceServerConfigurerAdapter {
 
         formAuthenticationConfig.configure(http);
 
-        http
+/*        http
                 .authorizeRequests()
                 .antMatchers(SecurityConstants.DEFAULT_LOGIN_PAGE
                         , securityProperites.getBrowser().getSignInPage(),
@@ -57,8 +59,9 @@ public class AppResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .permitAll()
                 .anyRequest()
                 .authenticated()
-
-        ;
+        ;*/
+        //授权url
+        authorizeConfigManager.config(http.authorizeRequests());
 
         http
                 .csrf()
