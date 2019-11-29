@@ -14,13 +14,32 @@ import java.util.List;
  */
 @Component
 public class DelegateAuthorizeConfigManager implements AuthorizeConfigManager {
+    /**
+     * 可以调整优先级
+     */
     @Autowired
     List<AuthorizeConfigProvider> authorizeConfigProviders;
 
     @Override
     public void config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry) {
-        authorizeConfigProviders.forEach(provider -> provider.config(registry));
+        boolean exsitAnyRequest =false;
+        for (AuthorizeConfigProvider provider : authorizeConfigProviders) {
+            boolean currentIsAnyRequestConfig =provider.config(registry);
 
-        registry.anyRequest().authenticated();
+
+
+            // 如果当前配置有anyRequest配置，那么把existAnyRequestConfig置为true，标识已经有了anyRequest配置
+
+            if(currentIsAnyRequestConfig){
+                exsitAnyRequest=true;
+            }
+
+        }
+        // 如果系统中没有配置anyRequest，那么增加一个anyRequest
+
+        if(!exsitAnyRequest){
+            registry.anyRequest().authenticated();
+
+        }
     }
 }

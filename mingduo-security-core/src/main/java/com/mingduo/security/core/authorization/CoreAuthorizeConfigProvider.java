@@ -21,7 +21,7 @@ public class CoreAuthorizeConfigProvider implements AuthorizeConfigProvider {
     SecurityProperites securityProperites;
 
     @Override
-    public void config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry) {
+    public boolean config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry) {
         registry.antMatchers(SecurityConstants.DEFAULT_LOGIN_PAGE,
                 SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/*",
                 SecurityConstants.DEFAULT_SOCIAL_USER_INFO_URL,
@@ -34,5 +34,7 @@ public class CoreAuthorizeConfigProvider implements AuthorizeConfigProvider {
         if(StringUtils.isNotBlank(securityProperites.getBrowser().getSignOutPage())){
             registry.antMatchers(securityProperites.getBrowser().getSignOutPage()).permitAll();
         }
+        return false;
+
     }
 }

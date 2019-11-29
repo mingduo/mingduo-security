@@ -1,5 +1,8 @@
 package com.mingduo.security.core.constants;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * 
  * @description:
@@ -60,5 +63,11 @@ public interface SecurityConstants {
      * 发送短信验证码 或 验证短信验证码时，传递手机号的参数的名称
      */
     String DEFAULT_PARAMETER_NAME_MOBILE = "mobile";
+    /**
+     *
+     */
+    List<String> ADMIN_ROLE_LIST= Arrays.asList("mingduo","weizichao");
+
+    List<String> USER_ROLE_LIST= Arrays.asList("user","123");
 
 }

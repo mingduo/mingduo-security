@@ -18,10 +18,10 @@ public class DemoAuthorizeConfigProvider implements AuthorizeConfigProvider {
 
 
     @Override
-    public void config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry) {
+    public boolean config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry) {
         registry.antMatchers( "/user/register")
                 .permitAll();
-        registry.antMatchers("/user/me").hasRole("ADMIN");
+        return false;
     }
 
 

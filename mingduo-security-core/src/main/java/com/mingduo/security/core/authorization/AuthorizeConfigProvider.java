@@ -19,5 +19,5 @@ public interface AuthorizeConfigProvider {
      * 系统会自动增加一个anyRequest().authenticated()的配置。如果有多个针对anyRequest
      * 的配置，则会抛出异常。
      */
-    void config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry);
+    boolean config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry);
 }

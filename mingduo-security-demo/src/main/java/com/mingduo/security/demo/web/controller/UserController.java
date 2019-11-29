@@ -1,7 +1,6 @@
 package com.mingduo.security.demo.web.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.mingduo.security.core.properties.SecurityProperites;
 import com.mingduo.security.demo.dto.User;
 import com.mingduo.security.demo.dto.UserQueryCondition;
 import io.swagger.annotations.ApiOperation;
@@ -48,8 +47,7 @@ public class UserController implements ApplicationContextAware {
     ProviderSignInUtils providerSignInUtils;
 
     private ApplicationContext applicationContext;
-    @Autowired
-    private SecurityProperites securityProperites;
+
 
     @PostMapping("/register")
     public void register(User user, HttpServletRequest request) {
