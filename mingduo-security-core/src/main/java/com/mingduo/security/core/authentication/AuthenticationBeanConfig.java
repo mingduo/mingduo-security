@@ -35,7 +35,7 @@ public class AuthenticationBeanConfig {
     @ConditionalOnMissingBean(SocialUserDetailsService.class)
     @Bean
     public SocialUserDetailsService defaultSocialUserDetailsService(){
-        return new DefaultUserDetailService();
+        return new DefaultSocialUserDetailsService();
     }
 
 

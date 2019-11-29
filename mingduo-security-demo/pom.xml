@@ -24,11 +24,7 @@
             <artifactId>mingduo-security-browser</artifactId>
             <version>${mingduo.security.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.mingduo.security</groupId>
-            <artifactId>mingduo-security-authorize</artifactId>
-            <version>${mingduo.security.version}</version>
-        </dependency>
+
 
         <!-- 使用app打开下面依赖-->
    <!--     <dependency>
@@ -37,6 +33,12 @@
             <version>${mingduo.security.version}</version>
         </dependency>-->
 
+        <!--使用 rbac 模式打开此注解 -->
+     <!--   <dependency>
+            <groupId>com.mingduo.security</groupId>
+            <artifactId>mingduo-security-authorize</artifactId>
+            <version>${mingduo.security.version}</version>
+        </dependency>-->
 
 
         <dependency>

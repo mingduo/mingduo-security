@@ -92,6 +92,8 @@ public class UserController implements ApplicationContextAware {
 
             System.out.println(author);
         }
+        //浏览器 user displayname 序列化有问题
+       // return user.getPrincipal();
         return user;
     }
 
