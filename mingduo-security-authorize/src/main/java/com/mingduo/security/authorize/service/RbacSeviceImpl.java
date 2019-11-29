@@ -26,8 +26,12 @@ public class RbacSeviceImpl implements RbacService {
 
     /**
      * 参数为什么注入 ？
+     * 属性来源
      * @see SecurityExpressionRoot
      * @see org.springframework.security.web.access.expression.WebSecurityExpressionRoot
+     * 属性查找
+     * @see org.springframework.expression.spel.support.ReflectivePropertyAccessor
+     *
      * @param request
      * @param authentication
      * @return
