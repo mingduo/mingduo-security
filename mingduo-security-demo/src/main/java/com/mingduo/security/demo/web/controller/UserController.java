@@ -106,7 +106,8 @@ public class UserController implements ApplicationContextAware {
 
     @ApiOperation("查询用户信息")
     @GetMapping
-    public List<User> query(UserQueryCondition condition, @PageableDefault(page = 1, size = 15, sort = "username,desc") Pageable pageable) {
+    public List<User> query(UserQueryCondition condition,
+                            @PageableDefault(page = 1, size = 15, sort = "username,desc") Pageable pageable) {
 
         log.info(ReflectionToStringBuilder
                 .toString(condition, ToStringStyle.MULTI_LINE_STYLE));
