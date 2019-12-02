@@ -19,6 +19,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.jwt.JwtHelper;
 import org.springframework.security.oauth2.common.util.JsonParserFactory;
 import org.springframework.social.connect.web.ProviderSignInUtils;
+import org.springframework.social.security.SocialAuthenticationToken;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -92,8 +93,13 @@ public class UserController implements ApplicationContextAware {
 
             System.out.println(author);
         }
-        //浏览器 user displayname 序列化有问题
+
        // return user.getPrincipal();
+        if(user instanceof SocialAuthenticationToken){
+            //浏览器 user displayname 序列化有问题
+            //((SocialAuthenticationToken) user).getConnection().getDisplayName() NullPointException
+            return user.getPrincipal();
+        }
         return user;
     }
 
