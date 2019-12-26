@@ -32,6 +32,9 @@
         <module>mingduo-security-browser</module>
         <module>mingduo-security-app</module>
 
+        <module>mingduo-security-sso-client-A</module>
+        <module>mingduo-security-sso-client-B</module>
+        <module>mingduo-security-sso-server</module>
     </modules>
 
     <dependencyManagement>
