@@ -35,6 +35,11 @@
         <module>mingduo-security-sso-client-A</module>
         <module>mingduo-security-sso-client-B</module>
         <module>mingduo-security-sso-server</module>
+
+
+        <module>cloud-security-is-user-api</module>
+
+
     </modules>
 
     <dependencyManagement>

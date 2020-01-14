@@ -20,6 +20,7 @@ public class CustomSocialConfigurer extends SpringSocialConfigurer {
     private String filterProcessesUrl;
 
     private  AuthenticationSuccessHandler successHandler;
+    
     @Autowired(required = false)
     ObjectProvider<SocialAuthenticationFilterPostProcessor> authenticationFilterPostProcessorObjectProvider;
     @Override
