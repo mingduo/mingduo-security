@@ -3,6 +3,7 @@ package com.cloud.security.is.user.api.filter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.util.concurrent.RateLimiter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,7 @@ import java.io.PrintWriter;
  * @apiNode:
  * @since 2020/1/14
  */
+@Order(1)
 @Component
 public class RateLimitFilter extends OncePerRequestFilter {
 
