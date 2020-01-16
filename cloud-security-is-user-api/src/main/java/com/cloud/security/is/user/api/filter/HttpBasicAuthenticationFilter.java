@@ -14,6 +14,7 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Base64;
 import java.util.Optional;
@@ -57,7 +58,11 @@ public class HttpBasicAuthenticationFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
 
         } finally {
-
+            //HttpBasicAuthenticationFilter 访问淘汰session
+            HttpSession session = request.getSession();
+            if(session.getAttribute("tmp")!=null){
+                session.invalidate();
+            }
         }
 
     }

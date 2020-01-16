@@ -5,6 +5,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -23,11 +24,16 @@ public class UserController {
 
 
     @GetMapping("/login")
-    public void login(@RequestBody UserInfo info,HttpServletRequest request)
+    public void login(@Validated UserInfo info,HttpServletRequest request)
     {
 
         UserInfo userInfo = userService.login(info);
-        request.getSession().setAttribute("user", userInfo);
+        HttpSession session = request.getSession();
+        //说明已经有人登录过 防止session固定攻击
+        if(session!=null){
+            session.invalidate();
+        }
+        request.getSession(true).setAttribute("user", userInfo);
     }
 
     @GetMapping("/logout")

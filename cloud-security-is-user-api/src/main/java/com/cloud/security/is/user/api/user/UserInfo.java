@@ -1,7 +1,8 @@
 package com.cloud.security.is.user.api.user;
 
 import lombok.Data;
-import org.springframework.beans.BeanUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.http.HttpMethod;
 
 import javax.validation.constraints.NotBlank;
 
@@ -28,9 +29,18 @@ public class UserInfo {
     private String permissions;
 
 
-    public UserInfo buildUserInfo(){
-        UserInfo userInfo = new UserInfo();
-        BeanUtils.copyProperties(this,userInfo);
-        return userInfo;
+
+    public boolean hasPermission(String method) {
+
+        if (StringUtils.equalsIgnoreCase(method, HttpMethod.GET.name())) {
+            if (StringUtils.contains(permissions, "r")) {
+                return true;
+            }
+        } else {
+            if (StringUtils.contains(permissions, "w")) {
+                return true;
+            }
+        }
+        return false;
     }
 }
