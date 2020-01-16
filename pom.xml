@@ -24,20 +24,23 @@
 
 
     <modules>
+        <!--spring security-->
         <module>mingduo-security-core</module>
-
         <module>mingduo-security-authorize</module>
         <module>mingduo-security-demo</module>
-
         <module>mingduo-security-browser</module>
         <module>mingduo-security-app</module>
 
+        <!--sso -->
         <module>mingduo-security-sso-client-A</module>
         <module>mingduo-security-sso-client-B</module>
         <module>mingduo-security-sso-server</module>
 
-
+        <!--cloud-security-->
         <module>cloud-security-is-user-api</module>
+        <module>cloud-security-is-server-auth</module>
+        <module>cloud-security-is-order-api</module>
+        <module>cloud-security-is-product-api</module>
 
 
     </modules>
