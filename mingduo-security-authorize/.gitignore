@@ -1,4 +1,4 @@
-mingduo-security-demo/HELP.md
+HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**
@@ -18,7 +18,6 @@ target/
 *.iws
 *.iml
 *.ipr
-.mvn
 
 ### NetBeans ###
 /nbproject/private/
@@ -30,10 +29,3 @@ build/
 
 ### VS Code ###
 .vscode/
-
-mvnw
-mvnw.cmd
-.mvn
-target
-!/.gitignore
-.gitignore
