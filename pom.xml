@@ -41,8 +41,7 @@
         <module>cloud-security-is-server-auth</module>
         <module>cloud-security-is-order-api</module>
         <module>cloud-security-is-product-api</module>
-
-
+        <module>cloud-security-is-gateway-zuul</module>
     </modules>
 
     <dependencyManagement>
