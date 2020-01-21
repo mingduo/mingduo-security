@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  * @author : weizc
- * @apiNode:
+ * @apiNode: 基于session实现
  * @since 2020/1/21
  */
 @Slf4j
@@ -55,17 +55,30 @@ public class SessionTokenFilter extends ZuulFilter {
                     adminProperties.getStoreStrategy().process(new ServletWebRequest(requestContext.getRequest()), tokenInfo);
                 } catch (Exception e) {
                     log.error("refresh_token 失败", e);
-                    requestContext.setResponseBody("{\"message\":\"refresh fail\"}");
-                    requestContext.setResponseStatusCode(500);
-                    requestContext.getResponse().setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
-                    requestContext.setSendZuulResponse(false);
+                    handleErrorResponse(requestContext);
                 }
 
             }
-            requestContext.addZuulRequestHeader("appId","font");
-            requestContext.addZuulRequestHeader("Authorization","bearer "+tokenInfo.getAccess_token());
+            addZuulRequestHeader(requestContext, tokenInfo.getAccess_token());
         }
 
         return null;
+    }
+
+    protected void addZuulRequestHeader(RequestContext requestContext, String accessToken) {
+        requestContext.addZuulRequestHeader("appId","font");
+        requestContext.addZuulRequestHeader("Authorization","bearer "+accessToken);
+    }
+
+
+    /**
+     * 错误处理
+     * @param requestContext
+     */
+    protected void handleErrorResponse(RequestContext requestContext) {
+        requestContext.setResponseBody("{\"message\":\"refresh fail\"}");
+        requestContext.setResponseStatusCode(500);
+        requestContext.getResponse().setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
+        requestContext.setSendZuulResponse(false);
     }
 }

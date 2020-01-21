@@ -1,5 +1,6 @@
 package mingduosecurity.admin.domain;
 
+import mingduosecurity.admin.utils.TokenUtils;
 import org.springframework.web.context.request.ServletWebRequest;
 
 public  enum TokenInfoStrategy {
@@ -12,10 +13,12 @@ public  enum TokenInfoStrategy {
     COOKIE {
         @Override
         public void process(ServletWebRequest webRequest, TokenInfo tokenInfo) {
+            TokenUtils.setAccessTokenCookie(webRequest,tokenInfo);
+
+            TokenUtils.setRefreshTokenCookie(webRequest,tokenInfo);
 
         }
     };
-
 
    public abstract void process(ServletWebRequest webRequest,TokenInfo tokenInfo);
 

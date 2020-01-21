@@ -15,14 +15,15 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class AdminBeanConfig {
 
-    @ConditionalOnProperty(prefix = "font.admin",name = "strategy" ,havingValue ="session",matchIfMissing = true)
+    @ConditionalOnProperty(prefix = "font.admin",name = "store-strategy" ,havingValue ="session",matchIfMissing = true)
     @Bean
     public SessionTokenFilter sessionTokenFilter(){
+
         return new SessionTokenFilter();
     }
 
 
-    @ConditionalOnProperty(prefix = "font.admin",name = "strategy" ,havingValue ="cookie")
+    @ConditionalOnProperty(prefix = "font.admin",name = "store-strategy" ,havingValue ="cookie")
     @Bean
     public CookieTokenFilter cookieTokenFilter(){
         return new CookieTokenFilter();
