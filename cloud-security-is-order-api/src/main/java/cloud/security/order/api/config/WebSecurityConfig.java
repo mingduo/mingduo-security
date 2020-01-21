@@ -45,7 +45,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public ResourceServerTokenServices resourceServerTokenServices() {
         RemoteTokenServices tokenServices = new RemoteTokenServices();
         tokenServices.setClientId("order");
-        tokenServices.setClientSecret("123");
+        tokenServices.setClientSecret("123456");
         tokenServices.setCheckTokenEndpointUrl("http://localhost:9090/oauth/check_token");
         tokenServices.setAccessTokenConverter(getAccessTokenConverter());
         return tokenServices;

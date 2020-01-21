@@ -11,10 +11,9 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
- * 
+ * @author : weizc
  * @apiNode:
  * @since 2020/1/16
- * @author : weizc 
  */
 @Configuration
 public class MyWebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -30,12 +29,15 @@ public class MyWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-       http.authorizeRequests().anyRequest().authenticated();
+        http.authorizeRequests().anyRequest().authenticated();
+        http.httpBasic()
+                .and()
+                .csrf().disable();
     }
 
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 

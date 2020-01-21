@@ -2,10 +2,7 @@ package cloud.security.order.api.controller;
 
 import cloud.security.order.api.domain.OrderInfo;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 
@@ -27,9 +24,9 @@ public class OrderController {
      * @return
      */
     @PostMapping
-    public OrderInfo create(@RequestBody OrderInfo info //, @RequestHeader String headerUserName,
-                           /* @AuthenticationPrincipal(expression = "#this.username")String username */){
-       // log.info("user username is"+username);
+    public OrderInfo create(@RequestBody OrderInfo info , @RequestHeader("username") String headerUserName
+            /*, @AuthenticationPrincipal(expression = "#this.username")String username*/ ){
+        log.info("user username is"+headerUserName);
         return info;
     }
 

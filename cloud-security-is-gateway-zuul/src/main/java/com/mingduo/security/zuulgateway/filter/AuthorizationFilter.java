@@ -59,7 +59,7 @@ public class AuthorizationFilter extends ZuulFilter {
                 }
                 requestContext.addZuulRequestHeader("username",tokenInfo.getUser_name());
             } else {
-                if (!StringUtils.startsWith(request.getRequestURI(), "/token")) {
+                if (!StringUtils.contains(request.getRequestURI(), "/token")) {
                     //没有认证
 
                     log.error("401 没有认证 ");

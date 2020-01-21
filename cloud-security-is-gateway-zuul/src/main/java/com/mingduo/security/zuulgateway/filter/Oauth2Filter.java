@@ -50,10 +50,9 @@ public class Oauth2Filter extends ZuulFilter {
         RequestContext requestContext = RequestContext.getCurrentContext();
         HttpServletRequest request = requestContext.getRequest();
 
-        String header = request.getHeader("Authorization");
 
         try {
-            TokenInfo tokenInfo = getTokenInfo(header);
+            TokenInfo tokenInfo = getTokenInfo(request);
             request.setAttribute("tokenInfo", tokenInfo);
         }catch (Exception e){
             log.error("check token failed",e);
@@ -62,9 +61,15 @@ public class Oauth2Filter extends ZuulFilter {
         return null;
     }
 
-    private TokenInfo getTokenInfo(String header) {
+    private TokenInfo getTokenInfo(HttpServletRequest request) {
+        String header = request.getHeader("Authorization");
+        String appId = request.getHeader("appId");
         if(StringUtils.isBlank(header)||!StringUtils.startsWith(header,"bearer")){
             throw new RuntimeException("未发现请求头[Authorization]或者请求没有以[bearer]开始");
+        }
+
+        if(StringUtils.isBlank(appId)){
+            throw new RuntimeException("未发现请求头[appId]");
         }
 
         String token = StringUtils.substringAfter(header, "bearer ");
@@ -77,7 +82,7 @@ public class Oauth2Filter extends ZuulFilter {
 
         HttpHeaders httpheaders=new HttpHeaders();
         //设置basic头
-        httpheaders.setBasicAuth("order","123");
+        httpheaders.setBasicAuth(appId,"123456");
         httpheaders.set(HttpHeaders.CONTENT_TYPE,MediaType.APPLICATION_FORM_URLENCODED_VALUE);
 
         HttpEntity entity = new HttpEntity(params,httpheaders);
