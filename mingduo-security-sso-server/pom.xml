@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <artifactId>mingduo-sso-server</artifactId>
+    <artifactId>mingduo-security-sso-server</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>mingduo-sso-server</name>
     <description>sso-server</description>

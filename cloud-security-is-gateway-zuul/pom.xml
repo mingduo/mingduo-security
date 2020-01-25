@@ -8,7 +8,7 @@
         <version>0.0.1-SNAPSHOT</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <artifactId>cloud-security-gateway-zuul</artifactId>
+    <artifactId>cloud-security-is-gateway-zuul</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>cloud-security-gateway-zuul</name>
     <description>zuul网关</description>
