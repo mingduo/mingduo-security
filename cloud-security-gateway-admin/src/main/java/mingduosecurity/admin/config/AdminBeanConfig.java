@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * 
- * @apiNode:
+ * @apiNode: 前端bean 配置
  * @since 2020/1/21
  * @author : weizc 
  */

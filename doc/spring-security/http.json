@@ -1,0 +1,716 @@
+{
+    "version": 6,
+    "entities": [
+        {
+            "entity": {
+                "type": "Project",
+                "description": "",
+                "id": "7b5e16ba-494a-4c89-af8f-1e271d4d9d8a",
+                "name": "oauth2"
+            },
+            "children": [
+                {
+                    "entity": {
+                        "type": "Request",
+                        "method": {
+                            "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+                            "name": "GET"
+                        },
+                        "body": {
+                            "formBody": {
+                                "overrideContentType": true,
+                                "encoding": "application/x-www-form-urlencoded",
+                                "items": []
+                            },
+                            "bodyType": "Text"
+                        },
+                        "uri": {
+                            "query": {
+                                "delimiter": "&",
+                                "items": []
+                            },
+                            "scheme": {
+                                "name": "http",
+                                "version": "V11"
+                            },
+                            "host": "localhost",
+                            "path": "/user/me"
+                        },
+                        "id": "c0c29c76-5ed3-494b-b7ef-d575d8943e78",
+                        "name": "00获取用户信息",
+                        "headers": [
+                            {
+                                "enabled": true,
+                                "name": "Authorization",
+                                "value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJ3ZWkiLCJhdXRob3IiOiJtaW5nZHVvIiwic2NvcGUiOlsiYWxsIl0sImV4cCI6MTU3NDQyMDg2NCwiYXV0aG9yaXRpZXMiOlsiUk9MRV9VU0VSIiwiQURNSU4iXSwianRpIjoiNTM0YTZhZGYtNTc4Ny00NTg1LTljOWMtN2NjMDk5YjE4MThkIiwiY2xpZW50X2lkIjoibWluZ2R1byJ9.6mZqvqCHJ8I_L0P9bSM7w7JqZqY0BGsM-JOeAEzeP0E"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "entity": {
+                        "type": "Request",
+                        "method": {
+                            "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+                            "name": "GET"
+                        },
+                        "body": {
+                            "formBody": {
+                                "overrideContentType": true,
+                                "encoding": "application/x-www-form-urlencoded",
+                                "items": []
+                            },
+                            "bodyType": "Text"
+                        },
+                        "uri": {
+                            "query": {
+                                "delimiter": "&",
+                                "items": [
+                                    {
+                                        "enabled": true,
+                                        "name": "response_type",
+                                        "value": "code"
+                                    },
+                                    {
+                                        "enabled": true,
+                                        "name": "client_id",
+                                        "value": "mingduo"
+                                    },
+                                    {
+                                        "enabled": true,
+                                        "name": "redirect_uri",
+                                        "value": "http://localhost/"
+                                    },
+                                    {
+                                        "enabled": true,
+                                        "name": "scope",
+                                        "value": "all"
+                                    }
+                                ]
+                            },
+                            "scheme": {
+                                "name": "http",
+                                "version": "V11"
+                            },
+                            "host": "localhost",
+                            "path": "/oauth/authorize"
+                        },
+                        "id": "e4b0909c-93f9-4791-b88f-a22901f9334a",
+                        "name": "01授权码授权",
+                        "headers": [],
+                        "assertions": [
+                            {
+                                "comparison": "Equals",
+                                "subject": "ResponseStatus",
+                                "path": "code",
+                                "value": "200"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "entity": {
+                        "type": "Request",
+                        "method": {
+                            "requestBody": true,
+                            "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+                            "name": "POST"
+                        },
+                        "body": {
+                            "formBody": {
+                                "overrideContentType": true,
+                                "encoding": "application/x-www-form-urlencoded",
+                                "items": []
+                            },
+                            "bodyType": "Text"
+                        },
+                        "uri": {
+                            "query": {
+                                "delimiter": "&",
+                                "items": [
+                                    {
+                                        "enabled": true,
+                                        "name": "grant_type",
+                                        "value": "authorization_code"
+                                    },
+                                    {
+                                        "enabled": true,
+                                        "name": "code",
+                                        "value": "v4GWk6"
+                                    },
+                                    {
+                                        "enabled": true,
+                                        "name": "redirect_uri",
+                                        "value": "http://localhost/"
+                                    },
+                                    {
+                                        "enabled": true,
+                                        "name": "client_id",
+                                        "value": "mingduo"
+                                    },
+                                    {
+                                        "enabled": true,
+                                        "name": "scope",
+                                        "value": "all"
+                                    }
+                                ]
+                            },
+                            "scheme": {
+                                "name": "http",
+                                "version": "V11"
+                            },
+                            "host": "localhost",
+                            "path": "/oauth/token"
+                        },
+                        "id": "c92d0fd4-94b8-4c37-913e-6fc7706bab45",
+                        "name": "02授权码获取access_token",
+                        "headers": [
+                            {
+                                "enabled": true,
+                                "name": "Content-Type",
+                                "value": "application/x-www-form-urlencoded"
+                            },
+                            {
+                                "enabled": true,
+                                "name": "Authorization",
+                                "value": "Basic bWluZ2R1bzoxMjM0NTY="
+                            }
+                        ]
+                    }
+                },
+                {
+                    "entity": {
+                        "type": "Request",
+                        "method": {
+                            "requestBody": true,
+                            "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+                            "name": "POST"
+                        },
+                        "body": {
+                            "formBody": {
+                                "overrideContentType": true,
+                                "encoding": "application/x-www-form-urlencoded",
+                                "items": []
+                            },
+                            "bodyType": "Text",
+                            "textBodyEditorHeight": 221
+                        },
+                        "uri": {
+                            "query": {
+                                "delimiter": "&",
+                                "items": [
+                                    {
+                                        "enabled": true,
+                                        "name": "grant_type",
+                                        "value": "password"
+                                    },
+                                    {
+                                        "enabled": true,
+                                        "name": "username",
+                                        "value": "wei"
+                                    },
+                                    {
+                                        "enabled": true,
+                                        "name": "password",
+                                        "value": "123"
+                                    },
+                                    {
+                                        "enabled": true,
+                                        "name": "scope",
+                                        "value": "all"
+                                    }
+                                ]
+                            },
+                            "scheme": {
+                                "name": "http",
+                                "version": "V11"
+                            },
+                            "host": "localhost",
+                            "path": "/oauth/token"
+                        },
+                        "id": "2b3e64a8-9b38-4eb6-9ab6-5fd8990888b9",
+                        "name": "03密码模式获取access_token",
+                        "headers": [
+                            {
+                                "enabled": true,
+                                "name": "Authorization",
+                                "value": "Basic bWluZ2R1bzoxMjM0NTY="
+                            },
+                            {
+                                "enabled": true,
+                                "name": "Content-Type",
+                                "value": "application/x-www-form-urlencoded"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "entity": {
+                        "type": "Request",
+                        "method": {
+                            "requestBody": true,
+                            "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+                            "name": "POST"
+                        },
+                        "body": {
+                            "formBody": {
+                                "overrideContentType": true,
+                                "encoding": "application/x-www-form-urlencoded",
+                                "items": []
+                            },
+                            "bodyType": "Text"
+                        },
+                        "uri": {
+                            "query": {
+                                "delimiter": "&",
+                                "items": [
+                                    {
+                                        "enabled": true,
+                                        "name": "grant_type",
+                                        "value": "refresh_token"
+                                    },
+                                    {
+                                        "enabled": true,
+                                        "name": "refresh_token",
+                                        "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJ3ZWkiLCJhdXRob3IiOiJtaW5nZHVvIiwic2NvcGUiOlsiYWxsIl0sImF0aSI6ImJjODdjY2IwLTI3NTItNDJmYi1iMThlLTRiMmQzODJkOGU0MiIsImV4cCI6MTU3NzAwNjQyNCwiYXV0aG9yaXRpZXMiOlsiUk9MRV9VU0VSIiwiQURNSU4iXSwianRpIjoiNGFiMjA3OWItOTM0Yi00NjBmLWFkY2EtYzVkMzkyMWE2ZmM3IiwiY2xpZW50X2lkIjoibWluZ2R1byJ9.aRCshgQ6G5Tmsd58SaVN3ys_K12G-qtezwYEM2eOM7I"
+                                    },
+                                    {
+                                        "enabled": true,
+                                        "name": "scope",
+                                        "value": "all"
+                                    }
+                                ]
+                            },
+                            "scheme": {
+                                "name": "http",
+                                "version": "V11"
+                            },
+                            "host": "localhost",
+                            "path": "/oauth/token"
+                        },
+                        "id": "0d80882f-3b68-43bf-8771-cc9347237a09",
+                        "name": "04refresh模式获取access_token",
+                        "headers": [
+                            {
+                                "enabled": true,
+                                "name": "Authorization",
+                                "value": "Basic bWluZ2R1bzoxMjM0NTY="
+                            },
+                            {
+                                "enabled": true,
+                                "name": "Content-Type",
+                                "value": "application/x-www-form-urlencoded"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "entity": {
+                        "type": "Request",
+                        "method": {
+                            "requestBody": true,
+                            "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+                            "name": "POST"
+                        },
+                        "body": {
+                            "formBody": {
+                                "overrideContentType": true,
+                                "encoding": "application/x-www-form-urlencoded",
+                                "items": []
+                            },
+                            "bodyType": "Text",
+                            "textBody": "{\"error\":\"unauthorized\",\"error_description\":\"Full authentication is required to access this resource\"}"
+                        },
+                        "uri": {
+                            "query": {
+                                "delimiter": "&",
+                                "items": [
+                                    {
+                                        "enabled": true,
+                                        "name": "username",
+                                        "value": "mw"
+                                    },
+                                    {
+                                        "enabled": true,
+                                        "name": "password",
+                                        "value": "123"
+                                    },
+                                    {
+                                        "enabled": true,
+                                        "name": "imageCode",
+                                        "value": "7373"
+                                    }
+                                ]
+                            },
+                            "scheme": {
+                                "name": "http",
+                                "version": "V11"
+                            },
+                            "host": "localhost",
+                            "path": "/authentication/form"
+                        },
+                        "id": "13a89c11-4d05-47c4-8b37-1b4a9c3c2403",
+                        "name": "05app用户密码登录",
+                        "headers": [
+                            {
+                                "enabled": true,
+                                "name": "Content-Type",
+                                "value": "application/json;charset=UTF-8"
+                            },
+                            {
+                                "enabled": true,
+                                "name": "Authorization",
+                                "value": "Basic bWluZ2R1bzoxMjM0NTY="
+                            },
+                            {
+                                "enabled": true,
+                                "name": "deviceId",
+                                "value": "007"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "entity": {
+                        "type": "Request",
+                        "method": {
+                            "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+                            "name": "GET"
+                        },
+                        "body": {
+                            "formBody": {
+                                "overrideContentType": true,
+                                "encoding": "application/x-www-form-urlencoded",
+                                "items": []
+                            },
+                            "bodyType": "Text"
+                        },
+                        "uri": {
+                            "query": {
+                                "delimiter": "&",
+                                "items": []
+                            },
+                            "scheme": {
+                                "name": "http",
+                                "version": "V11"
+                            },
+                            "host": "localhost",
+                            "path": "/code/image"
+                        },
+                        "id": "ecd6f3a7-8914-4da4-8640-e3855da37130",
+                        "name": "06app图片验证码",
+                        "headers": [
+                            {
+                                "enabled": true,
+                                "name": "deviceId",
+                                "value": "007"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "entity": {
+                        "type": "Request",
+                        "method": {
+                            "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+                            "name": "GET"
+                        },
+                        "body": {
+                            "formBody": {
+                                "overrideContentType": true,
+                                "encoding": "application/x-www-form-urlencoded",
+                                "items": []
+                            },
+                            "bodyType": "Text"
+                        },
+                        "uri": {
+                            "query": {
+                                "delimiter": "&",
+                                "items": [
+                                    {
+                                        "enabled": true,
+                                        "name": "mobile",
+                                        "value": "18751850344"
+                                    }
+                                ]
+                            },
+                            "scheme": {
+                                "name": "http",
+                                "version": "V11"
+                            },
+                            "host": "localhost",
+                            "path": "/code/sms"
+                        },
+                        "id": "25e8ec5f-0ce8-42a9-a508-37d428419f8e",
+                        "name": "07app短信验证码发送",
+                        "headers": [
+                            {
+                                "enabled": true,
+                                "name": "deviceId",
+                                "value": "008"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "entity": {
+                        "type": "Request",
+                        "method": {
+                            "requestBody": true,
+                            "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+                            "name": "POST"
+                        },
+                        "body": {
+                            "formBody": {
+                                "overrideContentType": true,
+                                "encoding": "application/x-www-form-urlencoded",
+                                "items": []
+                            },
+                            "bodyType": "Text"
+                        },
+                        "uri": {
+                            "query": {
+                                "delimiter": "&",
+                                "items": [
+                                    {
+                                        "enabled": true,
+                                        "name": "mobile",
+                                        "value": "18751850344"
+                                    },
+                                    {
+                                        "enabled": true,
+                                        "name": "smsCode",
+                                        "value": "865649"
+                                    }
+                                ]
+                            },
+                            "scheme": {
+                                "name": "http",
+                                "version": "V11"
+                            },
+                            "host": "localhost",
+                            "path": "/authentication/mobile"
+                        },
+                        "id": "6867ccb5-147d-4df7-9319-e9f02755abe6",
+                        "name": "08短信验证码登录",
+                        "headers": [
+                            {
+                                "enabled": true,
+                                "name": "deviceId",
+                                "value": "008"
+                            },
+                            {
+                                "enabled": true,
+                                "name": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "enabled": true,
+                                "name": "Authorization",
+                                "value": "Basic bWluZ2R1bzoxMjM0NTY="
+                            }
+                        ]
+                    }
+                },
+                {
+                    "entity": {
+                        "type": "Request",
+                        "method": {
+                            "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+                            "name": "GET"
+                        },
+                        "body": {
+                            "formBody": {
+                                "overrideContentType": true,
+                                "encoding": "application/x-www-form-urlencoded",
+                                "items": []
+                            },
+                            "bodyType": "Text"
+                        },
+                        "uri": {
+                            "query": {
+                                "delimiter": "&",
+                                "items": [
+                                    {
+                                        "enabled": true,
+                                        "name": "code",
+                                        "value": "316BB3BFCB96E8FA75CA998A39F8E6B3"
+                                    }
+                                ]
+                            },
+                            "scheme": {
+                                "name": "http",
+                                "version": "V11"
+                            },
+                            "host": "www.pinzhi365.com",
+                            "path": "/qqLogin/qq"
+                        },
+                        "id": "e9209242-dcf0-4df4-be76-731061a76089",
+                        "name": "09qq社交登录",
+                        "headers": [
+                            {
+                                "enabled": true,
+                                "name": "Authorization",
+                                "value": "Basic bWluZ2R1bzoxMjM0NTY="
+                            },
+                            {
+                                "enabled": true,
+                                "name": "Content-Type",
+                                "value": "application/x-www-form-urlencoded"
+                            },
+                            {
+                                "enabled": true,
+                                "name": "deviceId",
+                                "value": "007"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "entity": {
+                        "type": "Request",
+                        "method": {
+                            "requestBody": true,
+                            "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+                            "name": "POST"
+                        },
+                        "body": {
+                            "formBody": {
+                                "overrideContentType": true,
+                                "encoding": "application/x-www-form-urlencoded",
+                                "items": []
+                            },
+                            "bodyType": "Text"
+                        },
+                        "uri": {
+                            "query": {
+                                "delimiter": "&",
+                                "items": [
+                                    {
+                                        "enabled": true,
+                                        "name": "openId",
+                                        "value": "od4PTw1XDDka84Gb24H0tAj5H_AE"
+                                    },
+                                    {
+                                        "enabled": true,
+                                        "name": "providerId",
+                                        "value": "weixin"
+                                    }
+                                ]
+                            },
+                            "scheme": {
+                                "name": "http",
+                                "version": "V11"
+                            },
+                            "host": "localhost",
+                            "path": "/authentication/openId"
+                        },
+                        "id": "65b1b288-9dc0-454e-9208-17992cdc640a",
+                        "name": "10openId登录",
+                        "headers": [
+                            {
+                                "enabled": true,
+                                "name": "Authorization",
+                                "value": "Basic bWluZ2R1bzoxMjM0NTY="
+                            },
+                            {
+                                "enabled": true,
+                                "name": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "entity": {
+                        "type": "Request",
+                        "method": {
+                            "requestBody": true,
+                            "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+                            "name": "POST"
+                        },
+                        "body": {
+                            "formBody": {
+                                "overrideContentType": true,
+                                "encoding": "application/x-www-form-urlencoded",
+                                "items": [
+                                    {
+                                        "enabled": true,
+                                        "type": "Text",
+                                        "name": "username",
+                                        "value": "wei"
+                                    }
+                                ]
+                            },
+                            "bodyType": "Form"
+                        },
+                        "uri": {
+                            "query": {
+                                "delimiter": "&",
+                                "items": []
+                            },
+                            "scheme": {
+                                "name": "http",
+                                "version": "V11"
+                            },
+                            "host": "localhost",
+                            "path": "/user/register"
+                        },
+                        "id": "1e92107f-a933-4771-99cd-ca7b1c064204",
+                        "name": "11用户注册",
+                        "headers": [
+                            {
+                                "enabled": true,
+                                "name": "Content-Type",
+                                "value": "application/x-www-form-urlencoded"
+                            },
+                            {
+                                "enabled": true,
+                                "name": "deviceId",
+                                "value": "007"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "entity": {
+                        "type": "Request",
+                        "method": {
+                            "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+                            "name": "GET"
+                        },
+                        "body": {
+                            "formBody": {
+                                "overrideContentType": true,
+                                "encoding": "application/x-www-form-urlencoded",
+                                "items": []
+                            },
+                            "bodyType": "Text"
+                        },
+                        "uri": {
+                            "query": {
+                                "delimiter": "&",
+                                "items": []
+                            },
+                            "scheme": {
+                                "name": "http",
+                                "version": "V11"
+                            },
+                            "host": "www.pinzhi365.com",
+                            "path": "/social/user"
+                        },
+                        "id": "7a0face2-3e03-4c29-a4bb-a798a77546dd",
+                        "name": "12用户社交信息",
+                        "headers": [
+                            {
+                                "enabled": true,
+                                "name": "deviceId",
+                                "value": "007"
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    ]
+}

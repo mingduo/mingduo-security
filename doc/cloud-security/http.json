@@ -1,0 +1,706 @@
+{
+    "version": 6,
+    "entities": [
+        {
+            "entity": {
+                "type": "Project",
+                "id": "008ac5fa-3399-48a7-931b-2b2356929692",
+                "name": "cloud-security"
+            },
+            "children": [
+                {
+                    "entity": {
+                        "type": "Request",
+                        "method": {
+                            "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+                            "name": "GET"
+                        },
+                        "body": {
+                            "formBody": {
+                                "overrideContentType": true,
+                                "encoding": "application/x-www-form-urlencoded",
+                                "items": []
+                            },
+                            "bodyType": "Text"
+                        },
+                        "uri": {
+                            "query": {
+                                "delimiter": "&",
+                                "items": [
+                                    {
+                                        "enabled": true,
+                                        "name": "username",
+                                        "value": "demoData"
+                                    },
+                                    {
+                                        "enabled": true,
+                                        "name": "password",
+                                        "value": "demoData"
+                                    },
+                                    {
+                                        "enabled": true,
+                                        "name": "permissions",
+                                        "value": "r"
+                                    }
+                                ]
+                            },
+                            "scheme": {
+                                "secure": true,
+                                "name": "https",
+                                "version": "V11"
+                            },
+                            "host": "localhost:8080",
+                            "path": "/users/login"
+                        },
+                        "id": "840a82c5-ba94-4bc8-a1f3-b4f25b239e41",
+                        "name": "00 login",
+                        "headers": [
+                            {
+                                "enabled": true,
+                                "name": "Authorization",
+                                "value": "Basic ZGVtb0RhdGE6ZGVtb0RhdGE="
+                            }
+                        ]
+                    }
+                },
+                {
+                    "entity": {
+                        "type": "Request",
+                        "method": {
+                            "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+                            "name": "GET"
+                        },
+                        "body": {
+                            "formBody": {
+                                "overrideContentType": true,
+                                "encoding": "application/x-www-form-urlencoded",
+                                "items": []
+                            },
+                            "bodyType": "Text"
+                        },
+                        "uri": {
+                            "query": {
+                                "delimiter": "&",
+                                "items": [
+                                    {
+                                        "enabled": true,
+                                        "name": "name",
+                                        "value": "demoData"
+                                    }
+                                ]
+                            },
+                            "scheme": {
+                                "secure": true,
+                                "name": "https",
+                                "version": "V11"
+                            },
+                            "host": "localhost:8080",
+                            "path": "/users/"
+                        },
+                        "id": "b9112189-8f6f-44e1-83c0-30e60b8507da",
+                        "name": "01 test https",
+                        "headers": []
+                    }
+                },
+                {
+                    "entity": {
+                        "type": "Request",
+                        "method": {
+                            "requestBody": true,
+                            "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+                            "name": "POST"
+                        },
+                        "body": {
+                            "formBody": {
+                                "overrideContentType": true,
+                                "encoding": "application/x-www-form-urlencoded",
+                                "items": []
+                            },
+                            "bodyType": "Text"
+                        },
+                        "uri": {
+                            "query": {
+                                "delimiter": "&",
+                                "items": [
+                                    {
+                                        "enabled": true,
+                                        "name": "grant_type",
+                                        "value": "password"
+                                    },
+                                    {
+                                        "enabled": true,
+                                        "name": "scope",
+                                        "value": "write"
+                                    },
+                                    {
+                                        "enabled": true,
+                                        "name": "username",
+                                        "value": "mingduo"
+                                    },
+                                    {
+                                        "enabled": true,
+                                        "name": "password",
+                                        "value": "123456"
+                                    }
+                                ]
+                            },
+                            "scheme": {
+                                "name": "http",
+                                "version": "V11"
+                            },
+                            "host": "localhost:9090",
+                            "path": "/oauth/token"
+                        },
+                        "id": "8e323972-af8f-427c-8665-572101f0050b",
+                        "name": "02 /oauth/token",
+                        "headers": [
+                            {
+                                "enabled": true,
+                                "name": "Authorization",
+                                "value": "Basic b3JkZXI6MTIzNDU2"
+                            },
+                            {
+                                "enabled": true,
+                                "name": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "entity": {
+                        "type": "Request",
+                        "method": {
+                            "requestBody": true,
+                            "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+                            "name": "POST"
+                        },
+                        "body": {
+                            "formBody": {
+                                "overrideContentType": true,
+                                "encoding": "application/x-www-form-urlencoded",
+                                "items": []
+                            },
+                            "bodyType": "Text"
+                        },
+                        "uri": {
+                            "query": {
+                                "delimiter": "&",
+                                "items": [
+                                    {
+                                        "enabled": true,
+                                        "name": "token",
+                                        "value": "43723d5a-9331-4e75-8bff-99a86071627f"
+                                    }
+                                ]
+                            },
+                            "scheme": {
+                                "name": "http",
+                                "version": "V11"
+                            },
+                            "host": "localhost:9090",
+                            "path": "/oauth/check_token"
+                        },
+                        "id": "e837bd04-196c-4f5c-8ae1-1367b07d1e72",
+                        "name": "03 /oauth/check_token",
+                        "headers": [
+                            {
+                                "enabled": true,
+                                "name": "Authorization",
+                                "value": "Basic b3JkZXI6MTIzNDU2"
+                            },
+                            {
+                                "enabled": true,
+                                "name": "Content-Type",
+                                "value": "application/x-www-form-urlencoded"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "entity": {
+                        "type": "Request",
+                        "method": {
+                            "requestBody": true,
+                            "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+                            "name": "POST"
+                        },
+                        "body": {
+                            "formBody": {
+                                "overrideContentType": true,
+                                "encoding": "application/x-www-form-urlencoded",
+                                "items": []
+                            },
+                            "bodyType": "Text",
+                            "textBody": "{\n  \"id\": 2,\n  \"productId\": 1\n}"
+                        },
+                        "uri": {
+                            "query": {
+                                "delimiter": "&",
+                                "items": []
+                            },
+                            "scheme": {
+                                "name": "http",
+                                "version": "V11"
+                            },
+                            "host": "localhost:6060",
+                            "path": "/orders"
+                        },
+                        "id": "d9f6a7d0-590f-49b9-8c3c-cc85b96bb751",
+                        "name": "04 创建order",
+                        "headers": [
+                            {
+                                "enabled": true,
+                                "name": "Authorization",
+                                "value": "bearer 59c4f9cd-6df2-4a4f-a5c2-752d1c8110b8"
+                            },
+                            {
+                                "enabled": true,
+                                "name": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "enabled": true,
+                                "name": "username",
+                                "value": "order"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "entity": {
+                        "type": "Request",
+                        "method": {
+                            "requestBody": true,
+                            "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+                            "name": "POST"
+                        },
+                        "body": {
+                            "formBody": {
+                                "overrideContentType": true,
+                                "encoding": "application/x-www-form-urlencoded",
+                                "items": []
+                            },
+                            "bodyType": "Text"
+                        },
+                        "uri": {
+                            "query": {
+                                "delimiter": "&",
+                                "items": [
+                                    {
+                                        "enabled": true,
+                                        "name": "grant_type",
+                                        "value": "password"
+                                    },
+                                    {
+                                        "enabled": true,
+                                        "name": "scope",
+                                        "value": "write"
+                                    },
+                                    {
+                                        "enabled": true,
+                                        "name": "username",
+                                        "value": "mingduo"
+                                    },
+                                    {
+                                        "enabled": true,
+                                        "name": "password",
+                                        "value": "123456"
+                                    }
+                                ]
+                            },
+                            "scheme": {
+                                "name": "http",
+                                "version": "V11"
+                            },
+                            "host": "localhost:9047",
+                            "path": "/gateway/token/oauth/token"
+                        },
+                        "id": "0a9c783f-3f59-477f-b95d-4c7e25c1a978",
+                        "name": "05 zuul 转发/oauth/token",
+                        "headers": [
+                            {
+                                "enabled": true,
+                                "name": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "enabled": true,
+                                "name": "Authorization",
+                                "value": "Basic b3JkZXI6MTIzNDU2"
+                            },
+                            {
+                                "enabled": true,
+                                "name": "appId",
+                                "value": "order"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "entity": {
+                        "type": "Request",
+                        "method": {
+                            "requestBody": true,
+                            "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+                            "name": "POST"
+                        },
+                        "body": {
+                            "formBody": {
+                                "overrideContentType": true,
+                                "encoding": "application/x-www-form-urlencoded",
+                                "items": []
+                            },
+                            "bodyType": "Text",
+                            "textBody": "{\n  \"id\": 2,\n  \"productId\": 1\n}"
+                        },
+                        "uri": {
+                            "query": {
+                                "delimiter": "&",
+                                "items": []
+                            },
+                            "scheme": {
+                                "name": "http",
+                                "version": "V11"
+                            },
+                            "host": "localhost:9047",
+                            "path": "/gateway/order/orders"
+                        },
+                        "id": "7956e3ec-7669-4931-a984-2e52cb2b5062",
+                        "name": "06 zuul转发 创建order",
+                        "headers": [
+                            {
+                                "enabled": true,
+                                "name": "Authorization",
+                                "value": "bearer 59c4f9cd-6df2-4a4f-a5c2-752d1c8110b8"
+                            },
+                            {
+                                "enabled": true,
+                                "name": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "enabled": true,
+                                "name": "username",
+                                "value": "order"
+                            },
+                            {
+                                "enabled": true,
+                                "name": "appId",
+                                "value": "order"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "entity": {
+                        "type": "Request",
+                        "method": {
+                            "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+                            "name": "GET"
+                        },
+                        "body": {
+                            "formBody": {
+                                "overrideContentType": true,
+                                "encoding": "application/x-www-form-urlencoded",
+                                "items": []
+                            },
+                            "bodyType": "Text"
+                        },
+                        "uri": {
+                            "query": {
+                                "delimiter": "&",
+                                "items": []
+                            },
+                            "scheme": {
+                                "name": "http",
+                                "version": "V11"
+                            },
+                            "host": "localhost:9047",
+                            "path": "/actuator/routes"
+                        },
+                        "id": "6c44f7c4-28f8-41f7-9810-65b9cfc7bc63",
+                        "name": "07 actuator/routes",
+                        "headers": []
+                    }
+                },
+                {
+                    "entity": {
+                        "type": "Request",
+                        "method": {
+                            "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+                            "name": "GET"
+                        },
+                        "body": {
+                            "formBody": {
+                                "overrideContentType": true,
+                                "encoding": "application/x-www-form-urlencoded",
+                                "items": []
+                            },
+                            "bodyType": "Text"
+                        },
+                        "uri": {
+                            "query": {
+                                "delimiter": "&",
+                                "items": [
+                                    {
+                                        "enabled": true,
+                                        "name": "response_type",
+                                        "value": "code"
+                                    },
+                                    {
+                                        "enabled": true,
+                                        "name": "client_id",
+                                        "value": "font"
+                                    },
+                                    {
+                                        "enabled": true,
+                                        "name": "redirect_uri",
+                                        "value": "http://httpbin.org/get"
+                                    },
+                                    {
+                                        "enabled": true,
+                                        "name": "scope",
+                                        "value": "all"
+                                    }
+                                ]
+                            },
+                            "scheme": {
+                                "name": "http",
+                                "version": "V11"
+                            },
+                            "host": "localhost:9090",
+                            "path": "/oauth/authorize"
+                        },
+                        "id": "6a2f510b-ebb9-4bdb-b376-94722cfad757",
+                        "name": "08 前端服务申请授权码",
+                        "headers": [
+                            {
+                                "enabled": true,
+                                "name": "Authorization",
+                                "value": "Basic bWk6MTIzNDU2"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "entity": {
+                        "type": "Request",
+                        "method": {
+                            "requestBody": true,
+                            "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+                            "name": "POST"
+                        },
+                        "body": {
+                            "formBody": {
+                                "overrideContentType": true,
+                                "encoding": "application/x-www-form-urlencoded",
+                                "items": []
+                            },
+                            "bodyType": "Text"
+                        },
+                        "uri": {
+                            "query": {
+                                "delimiter": "&",
+                                "items": [
+                                    {
+                                        "enabled": true,
+                                        "name": "code",
+                                        "value": "uy0Dyq"
+                                    }
+                                ]
+                            },
+                            "scheme": {
+                                "name": "http",
+                                "version": "V11"
+                            },
+                            "host": "localhost:4423",
+                            "path": "/font/loginCallback"
+                        },
+                        "id": "04f6f5eb-3c3e-4700-95d4-94c90a1c9260",
+                        "name": "09 前端获取token 信息",
+                        "headers": [
+                            {
+                                "enabled": true,
+                                "name": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "name": "",
+                                "value": ""
+                            }
+                        ]
+                    }
+                },
+                {
+                    "entity": {
+                        "type": "Request",
+                        "method": {
+                            "requestBody": true,
+                            "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+                            "name": "POST"
+                        },
+                        "body": {
+                            "formBody": {
+                                "overrideContentType": true,
+                                "encoding": "application/x-www-form-urlencoded",
+                                "items": []
+                            },
+                            "bodyType": "Text",
+                            "textBody": "{\n  \"id\": 3,\n  \"productId\": 1\n}"
+                        },
+                        "uri": {
+                            "query": {
+                                "delimiter": "&",
+                                "items": []
+                            },
+                            "scheme": {
+                                "name": "http",
+                                "version": "V11"
+                            },
+                            "host": "localhost:4423",
+                            "path": "/font/api/order/orders"
+                        },
+                        "id": "41a67f95-0c78-4c89-9ed1-aa48a514192c",
+                        "name": "10 前端 调用 order 中心",
+                        "headers": [
+                            {
+                                "enabled": true,
+                                "name": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "name": "",
+                                "value": ""
+                            }
+                        ]
+                    }
+                },
+                {
+                    "entity": {
+                        "type": "Request",
+                        "method": {
+                            "requestBody": true,
+                            "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+                            "name": "POST"
+                        },
+                        "body": {
+                            "formBody": {
+                                "overrideContentType": true,
+                                "encoding": "application/x-www-form-urlencoded",
+                                "items": []
+                            },
+                            "bodyType": "Text"
+                        },
+                        "uri": {
+                            "query": {
+                                "delimiter": "&",
+                                "items": [
+                                    {
+                                        "enabled": true,
+                                        "name": "code",
+                                        "value": "jSzY8D"
+                                    },
+                                    {
+                                        "enabled": true,
+                                        "name": "grant_type",
+                                        "value": "authorization_code"
+                                    },
+                                    {
+                                        "enabled": true,
+                                        "name": "redirect_uri",
+                                        "value": "http://httpbin.org/get"
+                                    },
+                                    {
+                                        "enabled": true,
+                                        "name": "client_id",
+                                        "value": "font"
+                                    }
+                                ]
+                            },
+                            "scheme": {
+                                "name": "http",
+                                "version": "V11"
+                            },
+                            "host": "localhost:9090",
+                            "path": "/oauth/token"
+                        },
+                        "id": "8ea528af-1fc6-4330-b8a2-89230e630ede",
+                        "name": "11 授权码token 信息",
+                        "headers": [
+                            {
+                                "enabled": true,
+                                "name": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "enabled": true,
+                                "name": "Authorization",
+                                "value": "Basic Zm9udDoxMjM0NTY="
+                            }
+                        ]
+                    }
+                },
+                {
+                    "entity": {
+                        "type": "Request",
+                        "method": {
+                            "requestBody": true,
+                            "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+                            "name": "POST"
+                        },
+                        "body": {
+                            "formBody": {
+                                "overrideContentType": true,
+                                "encoding": "application/x-www-form-urlencoded",
+                                "items": []
+                            },
+                            "bodyType": "Text"
+                        },
+                        "uri": {
+                            "query": {
+                                "delimiter": "&",
+                                "items": [
+                                    {
+                                        "name": "code",
+                                        "value": "QSNAJU"
+                                    },
+                                    {
+                                        "enabled": true,
+                                        "name": "grant_type",
+                                        "value": "refresh_token"
+                                    },
+                                    {
+                                        "enabled": true,
+                                        "name": "refresh_token",
+                                        "value": "f342bb69-3ed1-405e-bb1b-26c7797a1850"
+                                    }
+                                ]
+                            },
+                            "scheme": {
+                                "name": "http",
+                                "version": "V11"
+                            },
+                            "host": "localhost:9090",
+                            "path": "/oauth/token"
+                        },
+                        "id": "916999bb-1417-460d-91ae-70700883acd3",
+                        "name": "12 refresh_token 信息",
+                        "headers": [
+                            {
+                                "enabled": true,
+                                "name": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "enabled": true,
+                                "name": "Authorization",
+                                "value": "Basic Zm9udDoxMjM0NTY="
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    ]
+}
