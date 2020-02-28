@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>mingduo-security</groupId>
-    <artifactId>cloud-security-gateway-admin</artifactId>
+    <artifactId>cloud-security-font-admin</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>cloud-security-gateway-admin</name>
+    <name>cloud-security-font-admin</name>
     <description>前端服务器</description>
 
     <properties>

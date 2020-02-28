@@ -1,4 +1,4 @@
-package com.mingduo.security.zuulgateway.filter;
+package com.mingduo.security.zuulgateway.filter.zuul;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.exception.ZuulException;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
  * @since 2020/1/19
  * @author : weizc 
  */
-@Component
+//@Component
 @Slf4j
 public class AuditLogFilter extends ZuulFilter {
     @Override

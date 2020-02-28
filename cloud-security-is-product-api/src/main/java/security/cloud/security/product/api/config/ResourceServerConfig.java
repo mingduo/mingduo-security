@@ -1,6 +1,5 @@
-package cloud.security.order.api.config;
+package security.cloud.security.product.api.config;
 
-import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -28,9 +27,6 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers(HttpMethod.POST).access("#oauth2.hasAnyScope('write','all')")
-                .antMatchers(HttpMethod.GET).access("#oauth2.hasAnyScope('read','all')")
-              //  .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
                 .anyRequest().authenticated();
     }
 }

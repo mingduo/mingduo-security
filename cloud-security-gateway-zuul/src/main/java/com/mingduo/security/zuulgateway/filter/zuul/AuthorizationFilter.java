@@ -1,4 +1,4 @@
-package com.mingduo.security.zuulgateway.filter;
+package com.mingduo.security.zuulgateway.filter.zuul;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mingduo.security.zuulgateway.domain.TokenInfo;
@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
  * @since 2020/1/19
  */
 @Slf4j
-@Component
+//@Component
 public class AuthorizationFilter extends ZuulFilter {
 
     @Autowired

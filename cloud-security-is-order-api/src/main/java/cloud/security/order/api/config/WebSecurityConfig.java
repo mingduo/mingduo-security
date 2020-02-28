@@ -14,7 +14,7 @@ import org.springframework.security.oauth2.provider.token.*;
  * @apiNode:
  * @since 2020/1/16
  */
-@Configuration
+//@Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**

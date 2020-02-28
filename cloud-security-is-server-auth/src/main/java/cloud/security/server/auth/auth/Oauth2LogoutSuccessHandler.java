@@ -18,7 +18,7 @@ import java.io.IOException;
  * @author : weizc 
  */
 @Component
-public class DefaultLogoutSuccessHandler implements LogoutSuccessHandler {
+public class Oauth2LogoutSuccessHandler implements LogoutSuccessHandler {
     @Override
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         String redirectUrl= ServletRequestUtils.getStringParameter(request,"redirect_uri");

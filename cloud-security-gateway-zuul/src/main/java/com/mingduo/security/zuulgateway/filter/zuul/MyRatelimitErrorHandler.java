@@ -1,4 +1,4 @@
-package com.mingduo.security.zuulgateway.filter;
+package com.mingduo.security.zuulgateway.filter.zuul;
 
 import com.marcosbarbero.cloud.autoconfigure.zuul.ratelimit.config.repository.DefaultRateLimiterErrorHandler;
 import org.springframework.stereotype.Component;

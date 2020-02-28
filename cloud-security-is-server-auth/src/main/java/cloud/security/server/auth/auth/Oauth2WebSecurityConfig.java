@@ -17,7 +17,7 @@ import org.springframework.security.web.authentication.logout.LogoutSuccessHandl
  * @since 2020/1/16
  */
 @Configuration
-public class MyWebSecurityConfig extends WebSecurityConfigurerAdapter {
+public class Oauth2WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     UserDetailsService userDetailsService;

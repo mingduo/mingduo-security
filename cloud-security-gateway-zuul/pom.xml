@@ -8,7 +8,7 @@
         <version>0.0.1-SNAPSHOT</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <artifactId>cloud-security-is-gateway-zuul</artifactId>
+    <artifactId>cloud-security-gateway-zuul</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>cloud-security-gateway-zuul</name>
     <description>zuul网关</description>
@@ -42,6 +42,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-oauth2</artifactId>
         </dependency>
 
         <dependency>

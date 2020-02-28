@@ -62,7 +62,8 @@ public class SsoAuthorizationServerConfig  implements AuthorizationServerConfigu
     // tokenKey 就是对 JWT进行签名的key，
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-        endpoints.tokenStore(jwtTokenStore()).accessTokenConverter(jwtAccessTokenConverter())
+        endpoints.tokenStore(jwtTokenStore())
+                .accessTokenConverter(jwtAccessTokenConverter())
         .tokenEnhancer(jwtAccessTokenConverter());
 
     }

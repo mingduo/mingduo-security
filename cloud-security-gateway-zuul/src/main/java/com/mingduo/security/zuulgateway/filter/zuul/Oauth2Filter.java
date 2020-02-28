@@ -1,4 +1,4 @@
-package com.mingduo.security.zuulgateway.filter;
+package com.mingduo.security.zuulgateway.filter.zuul;
 
 import com.mingduo.security.zuulgateway.domain.TokenInfo;
 import com.netflix.zuul.ZuulFilter;
@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author : weizc 
  */
 @Slf4j
-@Component
+//@Component
 public class Oauth2Filter extends ZuulFilter {
 
 
