@@ -6,10 +6,10 @@ import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 
 @EnableZuulProxy
 @SpringBootApplication
-public class CloudSecurityGatewayAdminApplication {
+public class CloudSecurityFontApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(CloudSecurityGatewayAdminApplication.class, args);
+        SpringApplication.run(CloudSecurityFontApplication.class, args);
     }
 
 }

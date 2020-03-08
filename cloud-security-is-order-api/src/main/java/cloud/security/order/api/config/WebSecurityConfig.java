@@ -1,6 +1,7 @@
 package cloud.security.order.api.config;
 
 import cloud.security.order.api.domain.MyUserDetailService;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,7 +15,7 @@ import org.springframework.security.oauth2.provider.token.*;
  * @apiNode:
  * @since 2020/1/16
  */
-//@Configuration
+//@Configuration  使用jwt 注释掉
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
@@ -41,6 +42,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 
+    @ConditionalOnMissingBean
     @Bean
     public ResourceServerTokenServices resourceServerTokenServices() {
         RemoteTokenServices tokenServices = new RemoteTokenServices();

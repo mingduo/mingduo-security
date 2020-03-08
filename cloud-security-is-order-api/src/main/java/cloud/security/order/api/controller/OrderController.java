@@ -3,6 +3,7 @@ package cloud.security.order.api.controller;
 import cloud.security.order.api.domain.OrderInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
@@ -43,14 +44,14 @@ public class OrderController {
     OAuth2RestTemplate oAuth2RestTemplate;
 
     @GetMapping("/prices")
-    public String getPrices(@AuthenticationPrincipal UserDetails details ){
+    public String getPrices(@AuthenticationPrincipal Authentication user ){
 
 
         String price = oAuth2RestTemplate.getForObject("http://localhost:8086/prices/1", String.class);
 
-        log.info("details  is"+details);
+        log.info("details  is :"+user);
 
-        log.info("price  is"+price);
+        log.info("price  is :"+price);
         return price;
     }
 
