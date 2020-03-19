@@ -6,6 +6,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.common.exceptions.UnapprovedClientAuthenticationException;
 import org.springframework.security.oauth2.provider.*;
@@ -37,7 +38,8 @@ public class AppAuthenticationSuccessHandler extends SavedRequestAwareAuthentica
     private ClientDetailsService clientDetailsService;
     @Autowired
     private AuthorizationServerTokenServices tokenServices;
-
+    @Autowired
+    PasswordEncoder passwordEncoder;
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         logger.info("登录成功");
@@ -65,7 +67,7 @@ public class AppAuthenticationSuccessHandler extends SavedRequestAwareAuthentica
         ClientDetails clientDetail = clientDetailsService.loadClientByClientId(clientId);
         if (clientDetail == null) {
             throw new UnapprovedClientAuthenticationException("clientId对应的配置信息不存在:" + clientId);
-        } else if (!secret.equals(clientDetail.getClientSecret())) {
+        } else if (!passwordEncoder.matches(secret,clientDetail.getClientSecret())) {
             throw new UnapprovedClientAuthenticationException("clientSecret不匹配:" + clientId);
         }
 

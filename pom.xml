@@ -44,6 +44,7 @@
 
         <module>cloud-security-gateway-zuul</module>
         <module>cloud-security-font-admin</module>
+
     </modules>
 
     <dependencyManagement>
