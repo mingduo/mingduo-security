@@ -1,6 +1,5 @@
 package com.mingduo.security.zuulgateway.filter;
 
-import com.mingduo.security.zuulgateway.filter.zuul.AuditLogFilter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,6 +18,7 @@ import java.io.IOException;
  */
 @Slf4j
 public class AuditLogOncePerFilter extends OncePerRequestFilter {
+    public static final String LOG_USER="LOG_USER";
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         SecurityContext securityContext = SecurityContextHolder.getContext();
@@ -29,5 +29,9 @@ public class AuditLogOncePerFilter extends OncePerRequestFilter {
 
 
         filterChain.doFilter(request, response);
+
+        if(request.getAttribute(LOG_USER)!=null){
+            log.info("update log success");
+        }
     }
 }

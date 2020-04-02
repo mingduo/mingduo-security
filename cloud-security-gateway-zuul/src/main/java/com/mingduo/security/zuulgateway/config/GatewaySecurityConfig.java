@@ -8,6 +8,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
+import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.access.ExceptionTranslationFilter;
 import org.springframework.security.web.context.SecurityContextPersistenceFilter;
 
@@ -23,10 +25,17 @@ public class GatewaySecurityConfig extends ResourceServerConfigurerAdapter {
 
     @Autowired
     GatewayWebSecurityExpressionHandler gatewayWebSecurityExpressionHandler;
+    @Autowired
+    AccessDeniedHandler accessDeniedHandler;
+    @Autowired
+    AuthenticationEntryPoint authenticationEntryPoint;
+
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
         resources.resourceId("order-server")
-        .expressionHandler(gatewayWebSecurityExpressionHandler);
+        .expressionHandler(gatewayWebSecurityExpressionHandler)
+        .accessDeniedHandler(accessDeniedHandler)
+        .authenticationEntryPoint(authenticationEntryPoint);
     }
 
 

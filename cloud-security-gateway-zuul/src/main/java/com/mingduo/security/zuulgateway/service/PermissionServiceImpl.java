@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.AntPathMatcher;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Random;
 
 /**
  *
@@ -22,6 +23,7 @@ public class PermissionServiceImpl implements PermissionService {
 
     private AntPathMatcher antPathMatcher = new AntPathMatcher();
 
+    private Random r=new Random();
     @Override
     public boolean hasPermission(Authentication authentication, HttpServletRequest request) {
 
@@ -29,6 +31,11 @@ public class PermissionServiceImpl implements PermissionService {
         System.out.println("request uri : " + UrlUtils.buildRequestUrl(request));
         System.out.println("authentication :" + ReflectionToStringBuilder.toString(authentication, ToStringStyle.MULTI_LINE_STYLE));
 
+        int num = r.nextInt(10);
+
+        if (num<5) {
+            throw new AuthenticationServiceException("随机访问失败");
+        }
         if (authentication instanceof AnonymousAuthenticationToken) {
             throw new AuthenticationServiceException("匿名的用户登录");
         }
