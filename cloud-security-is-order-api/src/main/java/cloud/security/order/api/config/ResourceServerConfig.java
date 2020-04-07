@@ -1,8 +1,8 @@
 package cloud.security.order.api.config;
 
-import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
@@ -14,6 +14,7 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
  * @since 2020/1/16
  * @author : weizc 
  */
+@EnableGlobalMethodSecurity(prePostEnabled=true)//激活方法级别的权限认证
 @EnableResourceServer
 @Configuration
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {

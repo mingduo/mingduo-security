@@ -22,9 +22,13 @@ public class MyUserDetailService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         String rawPassword = String.valueOf(123456);
         String password = passwordEncoder.encode(rawPassword);
+        String roleStr = "ROLE_ADMIN";
+        if(username.length()>5){
+            roleStr="ROLE_USER";
+        }
         return User.withUsername(username)
                 .password(password)
-                .authorities("ROLE_ADMIN")
+                .authorities(roleStr)
                 .build();
     }
 }

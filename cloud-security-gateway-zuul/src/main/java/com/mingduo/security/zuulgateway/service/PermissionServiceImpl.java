@@ -33,7 +33,7 @@ public class PermissionServiceImpl implements PermissionService {
 
         int num = r.nextInt(10);
 
-        if (num<5) {
+        if (num<0) {
             throw new AuthenticationServiceException("随机访问失败");
         }
         if (authentication instanceof AnonymousAuthenticationToken) {

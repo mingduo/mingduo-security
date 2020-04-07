@@ -39,8 +39,10 @@
         <!--cloud-security-->
         <module>cloud-security-is-user-api</module>
         <module>cloud-security-is-server-auth</module>
+
         <module>cloud-security-is-order-api</module>
         <module>cloud-security-is-product-api</module>
+        <module>cloud-security-is-price-api</module>
 
         <module>cloud-security-gateway-zuul</module>
         <module>cloud-security-font-admin</module>
@@ -80,6 +82,16 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>2.1.0.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+
         </dependencies>
     </dependencyManagement>
 
