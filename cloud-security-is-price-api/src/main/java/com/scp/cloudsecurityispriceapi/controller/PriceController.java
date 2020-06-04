@@ -56,4 +56,10 @@ public class PriceController {
     public PriceInfo getPriceInfo(@PathVariable Integer id){
         return new PriceInfo(new BigDecimal(id));
     }
+
+
+    @GetMapping("/throwEx")
+    public PriceInfo thorwException(){
+        throw  new RuntimeException();
+    }
 }

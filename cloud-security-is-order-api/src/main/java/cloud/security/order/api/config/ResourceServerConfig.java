@@ -1,5 +1,6 @@
 package cloud.security.order.api.config;
 
+import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -20,7 +21,6 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
 
-
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
         resources.resourceId("order-server");
@@ -29,6 +29,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                //与acutuaor 整合
+                .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
                 .antMatchers(HttpMethod.POST).access("#oauth2.hasAnyScope('write','all')")
                 .antMatchers(HttpMethod.GET).access("#oauth2.hasAnyScope('read','all')")
               //  .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()

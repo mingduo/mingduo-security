@@ -372,12 +372,61 @@
                             {
                                 "enabled": true,
                                 "name": "Authorization",
-                                "value": "bearer 59c4f9cd-6df2-4a4f-a5c2-752d1c8110b8"
+                                "value": "bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsib3JkZXItc2VydmVyIl0sInVzZXJfbmFtZSI6Im1pbmdkdW8iLCJzY29wZSI6WyJhbGwiXSwiZXhwIjoxNTg1OTMyNjQ4LCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwianRpIjoiZmI2ODliZmEtN2UyZC00YjdmLWIyYWItZjY0NmNmYjIxYmNlIiwiY2xpZW50X2lkIjoiZm9udCJ9.iQ2Xg6GxdAWVkAA1-e6drg-r9MS6icO0XFOPyUfoKJUPhTrjUvVX4JUrbOM7LdMUc9IAbUYHEmPTt-8Xm9tI3cTFDzBVQCuSs7dUcYe6gJBX4iGnhAGeqgKK7NTALBQXdOUFaMA2pfDERgVNRSs3qn6nGCgHcUP3Jue2yVLSsyQvS85IYaaKzjJeyrCJ0alR98Dt6F1O-t4pbyHmlW-O_RfRj-Ttj73OYksIw5pAp1wkosVHdGpB_PPHoIp3t0g6Zpny32YnhKWlEBQOMmkLKFlLRokNOg9kPaepH85C02uYZuJrWNMHrRL34G52sA-gSF7kImQMQWyMxusTdgikEQ"
+                            },
+                            {
+                                "enabled": true,
+                                "name": "username",
+                                "value": "order"
+                            },
+                            {
+                                "enabled": true,
+                                "name": "appId",
+                                "value": "order"
                             },
                             {
                                 "enabled": true,
                                 "name": "Content-Type",
                                 "value": "application/json"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "entity": {
+                        "type": "Request",
+                        "method": {
+                            "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+                            "name": "GET"
+                        },
+                        "body": {
+                            "formBody": {
+                                "overrideContentType": true,
+                                "encoding": "application/x-www-form-urlencoded",
+                                "items": []
+                            },
+                            "bodyType": "Text",
+                            "textBody": "{\n  \"id\": 2,\n  \"productId\": 1\n}"
+                        },
+                        "uri": {
+                            "query": {
+                                "delimiter": "&",
+                                "items": []
+                            },
+                            "scheme": {
+                                "name": "http",
+                                "version": "V11"
+                            },
+                            "host": "localhost:9047",
+                            "path": "/gateway/order/orders/prices"
+                        },
+                        "id": "c3d6bb2e-eac5-4169-8e37-e32765c00fc5",
+                        "name": "07 zuul转发 order调用product",
+                        "headers": [
+                            {
+                                "enabled": true,
+                                "name": "Authorization",
+                                "value": "bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsib3JkZXItc2VydmVyIl0sInVzZXJfbmFtZSI6Im1pIiwic2NvcGUiOlsiYWxsIl0sImV4cCI6MTU4NTg0MjE0MCwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJqdGkiOiI2NGNkZWJkYi1jZWJiLTQyZWUtOTYyNi03OTRjNjZmNWI1ODYiLCJjbGllbnRfaWQiOiJmb250In0.Ew5yUrO2Ki6sOIo65ac7PBLxfqHGCdk9s8sXAf_tu0qasRwKjhiZ1BCOKXk-LcToRGsuajnMWiHJnRvHC1mdrCynPdhDwRtihwPPQjmSm9rsEA6xpyKbcQZyYsMUsVBS1K_4Rkp0z0voguopitz8FJjP0E3J9rtCYpXX5I4Zko3n3_EsJnmqBMHfSOBHoBZv37rlyJ4EtPEhjKln0TLccz4uAfZPdIWVjXS0irwgrj5w4kZNnzVnzea0sS9TOWyON1LBotQzlikvYpRph7dGkt_ja3883wxxqRzCEM7CSOJ_JtO-wa4mxoORXXl74YDI0Nzu4ovn5fbs0vh3W86HkQ"
                             },
                             {
                                 "enabled": true,
@@ -396,8 +445,9 @@
                     "entity": {
                         "type": "Request",
                         "method": {
-                            "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
-                            "name": "GET"
+                            "requestBody": true,
+                            "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+                            "name": "POST"
                         },
                         "body": {
                             "formBody": {
@@ -405,7 +455,8 @@
                                 "encoding": "application/x-www-form-urlencoded",
                                 "items": []
                             },
-                            "bodyType": "Text"
+                            "bodyType": "Text",
+                            "textBody": "{\n  \"id\": 2,\n  \"productId\": 1\n}"
                         },
                         "uri": {
                             "query": {
@@ -417,11 +468,32 @@
                                 "version": "V11"
                             },
                             "host": "localhost:9047",
-                            "path": "/actuator/routes"
+                            "path": "/gateway/order/orders/createOrder"
                         },
-                        "id": "6c44f7c4-28f8-41f7-9810-65b9cfc7bc63",
-                        "name": "07 actuator/routes",
-                        "headers": []
+                        "id": "af4dc7af-867b-4481-8bce-140ac10b24b8",
+                        "name": "08 zuul转发 创建order 限流",
+                        "headers": [
+                            {
+                                "enabled": true,
+                                "name": "Authorization",
+                                "value": "bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsib3JkZXItc2VydmVyIl0sInVzZXJfbmFtZSI6Im1pbmdkdW8iLCJzY29wZSI6WyJhbGwiXSwiZXhwIjoxNTg1OTMyNjQ4LCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwianRpIjoiZmI2ODliZmEtN2UyZC00YjdmLWIyYWItZjY0NmNmYjIxYmNlIiwiY2xpZW50X2lkIjoiZm9udCJ9.iQ2Xg6GxdAWVkAA1-e6drg-r9MS6icO0XFOPyUfoKJUPhTrjUvVX4JUrbOM7LdMUc9IAbUYHEmPTt-8Xm9tI3cTFDzBVQCuSs7dUcYe6gJBX4iGnhAGeqgKK7NTALBQXdOUFaMA2pfDERgVNRSs3qn6nGCgHcUP3Jue2yVLSsyQvS85IYaaKzjJeyrCJ0alR98Dt6F1O-t4pbyHmlW-O_RfRj-Ttj73OYksIw5pAp1wkosVHdGpB_PPHoIp3t0g6Zpny32YnhKWlEBQOMmkLKFlLRokNOg9kPaepH85C02uYZuJrWNMHrRL34G52sA-gSF7kImQMQWyMxusTdgikEQ"
+                            },
+                            {
+                                "enabled": true,
+                                "name": "username",
+                                "value": "order"
+                            },
+                            {
+                                "enabled": true,
+                                "name": "appId",
+                                "value": "order"
+                            },
+                            {
+                                "enabled": true,
+                                "name": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ]
                     }
                 },
                 {
@@ -473,61 +545,12 @@
                             "path": "/oauth/authorize"
                         },
                         "id": "6a2f510b-ebb9-4bdb-b376-94722cfad757",
-                        "name": "08 前端服务申请授权码",
+                        "name": "09 前端服务申请授权码",
                         "headers": [
                             {
                                 "enabled": true,
                                 "name": "Authorization",
-                                "value": "Basic bWk6MTIzNDU2"
-                            }
-                        ]
-                    }
-                },
-                {
-                    "entity": {
-                        "type": "Request",
-                        "method": {
-                            "requestBody": true,
-                            "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
-                            "name": "POST"
-                        },
-                        "body": {
-                            "formBody": {
-                                "overrideContentType": true,
-                                "encoding": "application/x-www-form-urlencoded",
-                                "items": []
-                            },
-                            "bodyType": "Text"
-                        },
-                        "uri": {
-                            "query": {
-                                "delimiter": "&",
-                                "items": [
-                                    {
-                                        "enabled": true,
-                                        "name": "code",
-                                        "value": "uy0Dyq"
-                                    }
-                                ]
-                            },
-                            "scheme": {
-                                "name": "http",
-                                "version": "V11"
-                            },
-                            "host": "localhost:4423",
-                            "path": "/font/loginCallback"
-                        },
-                        "id": "04f6f5eb-3c3e-4700-95d4-94c90a1c9260",
-                        "name": "09 前端获取token 信息",
-                        "headers": [
-                            {
-                                "enabled": true,
-                                "name": "Content-Type",
-                                "value": "application/json"
-                            },
-                            {
-                                "name": "",
-                                "value": ""
+                                "value": "Basic bWluZ2R1bzoxMjM0NTY="
                             }
                         ]
                     }
@@ -599,7 +622,56 @@
                                     {
                                         "enabled": true,
                                         "name": "code",
-                                        "value": "jSzY8D"
+                                        "value": "ryCiOh"
+                                    }
+                                ]
+                            },
+                            "scheme": {
+                                "name": "http",
+                                "version": "V11"
+                            },
+                            "host": "localhost:4423",
+                            "path": "/font/loginCallback"
+                        },
+                        "id": "04f6f5eb-3c3e-4700-95d4-94c90a1c9260",
+                        "name": "11 前端获取token 信息",
+                        "headers": [
+                            {
+                                "enabled": true,
+                                "name": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "name": "",
+                                "value": ""
+                            }
+                        ]
+                    }
+                },
+                {
+                    "entity": {
+                        "type": "Request",
+                        "method": {
+                            "requestBody": true,
+                            "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+                            "name": "POST"
+                        },
+                        "body": {
+                            "formBody": {
+                                "overrideContentType": true,
+                                "encoding": "application/x-www-form-urlencoded",
+                                "items": []
+                            },
+                            "bodyType": "Text"
+                        },
+                        "uri": {
+                            "query": {
+                                "delimiter": "&",
+                                "items": [
+                                    {
+                                        "enabled": true,
+                                        "name": "code",
+                                        "value": "l7llkg"
                                     },
                                     {
                                         "enabled": true,
@@ -626,7 +698,7 @@
                             "path": "/oauth/token"
                         },
                         "id": "8ea528af-1fc6-4330-b8a2-89230e630ede",
-                        "name": "11 授权码token 信息",
+                        "name": "12 授权码token 信息",
                         "headers": [
                             {
                                 "enabled": true,
@@ -685,7 +757,7 @@
                             "path": "/oauth/token"
                         },
                         "id": "916999bb-1417-460d-91ae-70700883acd3",
-                        "name": "12 refresh_token 信息",
+                        "name": "13 refresh_token 信息",
                         "headers": [
                             {
                                 "enabled": true,
@@ -698,6 +770,70 @@
                                 "value": "Basic Zm9udDoxMjM0NTY="
                             }
                         ]
+                    }
+                },
+                {
+                    "entity": {
+                        "type": "Request",
+                        "method": {
+                            "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+                            "name": "GET"
+                        },
+                        "body": {
+                            "formBody": {
+                                "overrideContentType": true,
+                                "encoding": "application/x-www-form-urlencoded",
+                                "items": []
+                            },
+                            "bodyType": "Text"
+                        },
+                        "uri": {
+                            "query": {
+                                "delimiter": "&",
+                                "items": []
+                            },
+                            "scheme": {
+                                "name": "http",
+                                "version": "V11"
+                            },
+                            "host": "localhost:9047",
+                            "path": "/actuator/routes"
+                        },
+                        "id": "6c44f7c4-28f8-41f7-9810-65b9cfc7bc63",
+                        "name": "14 actuator/routes",
+                        "headers": []
+                    }
+                },
+                {
+                    "entity": {
+                        "type": "Request",
+                        "method": {
+                            "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+                            "name": "GET"
+                        },
+                        "body": {
+                            "formBody": {
+                                "overrideContentType": true,
+                                "encoding": "application/x-www-form-urlencoded",
+                                "items": []
+                            },
+                            "bodyType": "Text"
+                        },
+                        "uri": {
+                            "query": {
+                                "delimiter": "&",
+                                "items": []
+                            },
+                            "scheme": {
+                                "name": "http",
+                                "version": "V11"
+                            },
+                            "host": "localhost:9699",
+                            "path": "/price"
+                        },
+                        "id": "a831ac9a-8f77-4ebf-9909-a1555c7436e4",
+                        "name": "15 获取价格 限流测试",
+                        "headers": []
                     }
                 }
             ]
