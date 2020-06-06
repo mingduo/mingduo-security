@@ -1,5 +1,6 @@
 package com.cloud.security.is.user.api.user;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,7 @@ import java.util.List;
  * @since 2020/1/14
  * @author : weizc 
  */
+@Slf4j
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -63,6 +65,8 @@ public class UserController {
 
     @GetMapping
     public List<UserInfo> query(String name) {
+        log.info("执行用户查询 param: {}={}","name",name);
+
         return userService.query(name);
     }
 

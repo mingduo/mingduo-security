@@ -58,7 +58,7 @@ public class TokenUtils {
 
 
         HttpHeaders headers = getHttpHeaders();
-
+    //		ResponseEntity<TokenInfo> token = restTemplate.exchange(oauthServiceUrl, HttpMethod.POST, entity, TokenInfo.class);
         TokenInfo tokenInfo = restTemplate.postForObject(url, new HttpEntity(params, headers), TokenInfo.class);
 
         return tokenInfo.init();

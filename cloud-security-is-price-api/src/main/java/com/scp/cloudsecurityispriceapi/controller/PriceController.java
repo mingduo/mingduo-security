@@ -6,9 +6,12 @@ import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.scp.cloudsecurityispriceapi.domain.PriceInfo;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.math.RandomUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import java.math.BigDecimal;
 
@@ -61,5 +64,19 @@ public class PriceController {
     @GetMapping("/throwEx")
     public PriceInfo thorwException(){
         throw  new RuntimeException();
+    }
+
+
+    RestTemplate restTemplate=new RestTemplate();
+
+    @GetMapping("/getUser")
+    public String getUser(@RequestParam(defaultValue = "demoData") String name) throws InterruptedException {
+
+        log.info("调用userapi ...");
+        String value = restTemplate.getForObject("http://localhost:8080/users?name="+name, String.class);
+        Thread.sleep(RandomUtils.nextInt( 1000));
+        log.info("调用userapi response:{}",value);
+
+        return value;
     }
 }
