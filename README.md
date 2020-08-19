@@ -9,6 +9,11 @@
     mingduo-security-sso-server  基于oauth2 sso
 # spring-cloud-security
     cloud-security-monitor 微服务中心监控
+       --pinpont 对链路进行监控
+       --prometheus 对应用性能指标进行监控
+       --grafana 对prometheus提供图形展现
+       --elk 对日志进行记录
+       -- kafka 日志进行传输
     cloud-security-font-admin 模拟前端
     cloud-security-gateway-zuul 基于zuul网关
     cloud-security-is-order-api 模拟订单中心
