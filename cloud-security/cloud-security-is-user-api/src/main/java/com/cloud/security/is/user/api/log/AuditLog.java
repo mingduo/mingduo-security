@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -33,7 +34,7 @@ public class AuditLog {
 
 
     @Temporal(TemporalType.TIMESTAMP)
-    @CreatedDate
+    @LastModifiedDate
     private Date modifyDate;
 
 

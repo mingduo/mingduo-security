@@ -1,7 +1,7 @@
 1.引入依赖(pom.xml)
 <dependency>
-	<groupId>com.imooc.security</groupId>
-	<artifactId>imooc-security-browser</artifactId>
+	 <groupId>com.mingduo.security</groupId>
+	<artifactId>mingduo-security-browser</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 </dependency>
 

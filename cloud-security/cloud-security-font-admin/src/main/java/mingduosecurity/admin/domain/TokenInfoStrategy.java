@@ -3,6 +3,9 @@ package mingduosecurity.admin.domain;
 import mingduosecurity.admin.utils.TokenUtils;
 import org.springframework.web.context.request.ServletWebRequest;
 
+/**
+ * @author weizc
+ */
 public  enum TokenInfoStrategy {
     SESSION{
         @Override

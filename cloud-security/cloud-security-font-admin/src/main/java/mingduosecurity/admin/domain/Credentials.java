@@ -6,7 +6,7 @@ package mingduosecurity.admin.domain;
 import lombok.Data;
 
 /**
- * @author jojo
+ * @author weizc
  *
  */
 @Data

@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.Collections;
 
@@ -91,7 +92,7 @@ public class AppAuthenticationSuccessHandler extends SavedRequestAwareAuthentica
     private String[] extractAndDecodeHeader(String header, HttpServletRequest request)
             throws IOException {
 
-        byte[] base64Token = header.substring(6).getBytes("UTF-8");
+        byte[] base64Token = header.substring(6).getBytes(StandardCharsets.UTF_8);
         byte[] decoded;
         try {
             decoded = Base64.getDecoder().decode(base64Token);
@@ -100,7 +101,7 @@ public class AppAuthenticationSuccessHandler extends SavedRequestAwareAuthentica
                     "Failed to decode basic authentication token");
         }
 
-        String token = new String(decoded, "UTF-8");
+        String token = new String(decoded, StandardCharsets.UTF_8);
 
         int delim = token.indexOf(":");
 

@@ -1,4 +1,4 @@
-# mingduo-security
+# boot-security
     mingduo-security-app     app端支持
     mingduo-security-authorize   权限模块基于rbac
     mingduo-security-browser  浏览器端支持
@@ -13,7 +13,7 @@
        --prometheus 对应用性能指标进行监控
        --grafana 对prometheus提供图形展现
        --elk 对日志进行记录
-       -- kafka 日志进行传输
+       -- kafka 日志异步传输
     cloud-security-font-admin 模拟前端
     cloud-security-gateway-zuul 基于zuul网关
     cloud-security-is-order-api 模拟订单中心
